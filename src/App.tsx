@@ -159,6 +159,7 @@ export default function App() {
             <TokenScanner
               tokens={botState?.scannedTokens || []}
               lastScanTime={botState?.lastScanTime || 0}
+              radarStatus={botState?.radarStatus}
             />
 
             {/* Trade & Telegram Notification History */}

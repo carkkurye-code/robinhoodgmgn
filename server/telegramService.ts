@@ -219,14 +219,29 @@ export class TelegramService {
 • Toplam Bilinen Maliyet: $${(c?.totalKnownCostsUsd ?? 0).toFixed(2)} USDT`;
     }
 
-    const message = `${title}
+    const gmgnUrl = `https://gmgn.ai/rh/token/${trade.tokenAddress}`;
+    const gmgnLink = `<a href="${gmgnUrl}">🔗 GMGN</a>`;
+
+    const message = isBuy
+      ? `${title}
 --------------------------------
 <b>Token:</b> ${trade.tokenSymbol} (${trade.tokenName})
 <b>Kontrat:</b> <code>${trade.tokenAddress}</code>
 <b>İşlem Fiyatı:</b> $${trade.priceUsd.toFixed(6)}
-<b>${isBuy ? 'Alım Tutarı' : 'Satış Tutarı (Brüt)'}:</b> $${trade.usdtAmount.toFixed(2)} USDT (${trade.tokenAmount.toLocaleString()} Token)
+<b>Alım Tutarı:</b> $${trade.usdtAmount.toFixed(2)} USDT (${trade.tokenAmount.toLocaleString()} Token)
+<b>Dinamik Skor:</b> %${trade.continuationScoreAtTrade}
+${gmgnLink}
+--------------------------------
+<i>Bilgi: Telegram işlem cüzdanı değildir. İşlemler GMGN & Robinhood Chain üzerinden izlenir.</i>`
+      : `${title}
+--------------------------------
+<b>Token:</b> ${trade.tokenSymbol} (${trade.tokenName})
+<b>Kontrat:</b> <code>${trade.tokenAddress}</code>
+<b>İşlem Fiyatı:</b> $${trade.priceUsd.toFixed(6)}
+<b>Satış Tutarı (Brüt):</b> $${trade.usdtAmount.toFixed(2)} USDT (${trade.tokenAmount.toLocaleString()} Token)
 <b>Dinamik Skor:</b> %${trade.continuationScoreAtTrade}${pnlBlock}
-<b>${isBuy ? 'Alım' : 'Satış'} Nedeni:</b> ${trade.reason}
+<b>Satış Nedeni:</b> ${trade.reason}
+${gmgnLink}
 --------------------------------
 <i>Bilgi: Telegram işlem cüzdanı değildir. İşlemler GMGN & Robinhood Chain üzerinden izlenir.</i>`;
 

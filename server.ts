@@ -21,8 +21,8 @@ async function startServer() {
     chainSlug: 'rh',
   });
 
-  // Auto-start paper trading cycle
-  engine.start();
+  // Initial token radar scan (bot starts in idle, clean PAPER_TRADING state ready for new session)
+  engine.runCycle().catch((err) => console.error('Initial radar scan error:', err));
 
   // Verification Matrix Data
   const getVerificationItems = (): VerificationItem[] => [

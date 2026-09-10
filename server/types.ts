@@ -24,6 +24,10 @@ export interface ScannedToken {
   };
   smartMoneyInflowUsd: number;
   poolCreatedAt: number;
+  tokenStage?: 'NEW_ENTRY' | 'SATURATED_HIGH_CAP' | 'RISKY';
+  isNewOpportunity?: boolean;
+  iouMatch?: 'TAM' | 'KISMİ' | 'DIŞI';
+  iouMatchDetails?: string;
   actionTaken?: 'BOUGHT' | 'SKIPPED' | 'MONITORING';
   decisionReason?: string;
 }
@@ -103,6 +107,14 @@ export interface BotState {
   scannedTokens: ScannedToken[];
   tradeHistory: ExecutedTrade[];
   lastScanTime: number;
+  radarStatus?: {
+    success: boolean;
+    source: string;
+    tokenCount: number;
+    error: string | null;
+    lastFetchTime: number;
+    lastSuccessTime?: number;
+  };
   stats: {
     totalTrades: number;
     profitableTrades: number;

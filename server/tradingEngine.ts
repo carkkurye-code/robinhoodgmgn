@@ -49,6 +49,7 @@ export class TradingEngine {
   private state: BotState;
   private loopInterval: NodeJS.Timeout | null = null;
   private tradeCounter = 0;
+  private sessionTradedTokens: Set<string> = new Set();
 
   constructor(config: GMGNConfig) {
     this.gmgnService = new GMGNService(config);
@@ -117,10 +118,10 @@ export class TradingEngine {
     // Run first iteration immediately
     this.runCycle().catch((err) => console.error('Cycle error:', err));
 
-    // Poll every 20 seconds to prevent GMGN rate limiting
+    // Poll every 10 seconds to keep active positions and stop-loss checks responsive
     this.loopInterval = setInterval(() => {
       this.runCycle().catch((err) => console.error('Cycle error:', err));
-    }, 20000);
+    }, 10000);
   }
 
   public stop() {
@@ -133,6 +134,11 @@ export class TradingEngine {
   }
 
   public reset() {
+    this.stop();
+    this.tradeCounter = 0;
+    this.sessionTradedTokens.clear();
+    this.state.isRunning = false;
+    this.state.mode = 'PAPER_TRADING';
     this.state.balanceUsdt = 500;
     this.state.initialBalanceUsdt = 500;
     this.state.activePositions = [];
@@ -144,6 +150,7 @@ export class TradingEngine {
       totalProfitUsd: 0,
       winRate: 0,
     };
+    console.log('[TradingEngine] PAPER_TRADING oturumu ve tüm işlem durumları temizlendi.');
   }
 
   public async runCycle() {
@@ -154,36 +161,84 @@ export class TradingEngine {
 
     // 1. Fetch scanned tokens on Robinhood Chain
     const rawTokens = await this.gmgnService.fetchRobinhoodTokens();
+    const radarInfo = this.gmgnService.getRadarStatus();
+    this.state.radarStatus = radarInfo;
 
-    // 2. Run Dynamic Continuation Analysis on each token
+    if (rawTokens.length > 0) {
+      console.log(`[GMGN Radar]: Robinhood Chain (4663) üzerinden ${rawTokens.length} adet gerçek token başarıyla çekildi.`);
+    } else {
+      console.warn(`[GMGN Radar]: Gerçek veri alınamadı veya liste boş. Hata: ${radarInfo.error || 'Veri bulunamadı'}`);
+    }
+
+    // 2. Run Dynamic Continuation & IOU Opportunity Analysis on each token
     const evaluatedTokens: ScannedToken[] = rawTokens.map((token) => {
       const evaluation = this.analysisEngine.evaluateToken(token);
+      const tokenAddressLower = token.address.toLowerCase();
+      const isAlreadyTradedInSession =
+        this.sessionTradedTokens.has(tokenAddressLower) ||
+        this.state.tradeHistory.some((th) => th.tokenAddress.toLowerCase() === tokenAddressLower);
+
+      if (isAlreadyTradedInSession) {
+        return {
+          ...token,
+          continuationProbability: evaluation.score,
+          continuationVerdict: evaluation.verdict,
+          decisionReason: 'Token bu oturumda daha önce alınıp işlem gördü. Radar sonuçlarında tekrar listelenmesi yeni fırsat olarak sayılmaz (Tekrar alım engellendi).',
+          tokenStage: evaluation.tokenStage,
+          isNewOpportunity: false,
+          iouMatch: 'DIŞI' as const,
+          iouMatchDetails: 'Oturumda işlem görmüş token (Yeniden alım engellendi)',
+        };
+      }
+
       return {
         ...token,
         continuationProbability: evaluation.score,
         continuationVerdict: evaluation.verdict,
         decisionReason: evaluation.reason,
+        tokenStage: evaluation.tokenStage,
+        isNewOpportunity: evaluation.isNewOpportunity,
+        iouMatch: evaluation.iouMatch,
+        iouMatchDetails: evaluation.iouMatchDetails,
       };
     });
 
     this.state.scannedTokens = evaluatedTokens;
 
-    // 3. Monitor Active Positions & Evaluate Dynamic Exits
-    await this.checkActivePositions(evaluatedTokens);
+    // 3. Monitor Active Positions & Evaluate Dynamic Exits (Sadece bot çalışıyorken)
+    if (this.state.isRunning && this.state.activePositions.length > 0) {
+      await this.checkActivePositions(evaluatedTokens);
+    }
 
-    // 4. Evaluate Dynamic Buy Opportunities (Max 3 open positions)
+    // 4. Evaluate Dynamic Buy Opportunities for New Entering Tokens (Sadece bot çalışıyorken, Max 3 açık pozisyon)
     const buyAmount = this.getTradeAmount();
-    if (this.state.activePositions.length < 3 && this.state.balanceUsdt >= buyAmount) {
-      for (const token of evaluatedTokens) {
-        // Must not already be holding
-        const isHolding = this.state.activePositions.some((p) => p.tokenAddress === token.address);
-        if (isHolding) continue;
+    if (this.state.isRunning && this.state.activePositions.length < 3 && this.state.balanceUsdt >= buyAmount) {
+      // Sort candidates: prioritize newly entered opportunities with TAM IOU match
+      const buyCandidates = evaluatedTokens.filter((token) => {
+        const tokenAddressLower = token.address.toLowerCase();
+        const isHolding = this.state.activePositions.some((p) => p.tokenAddress.toLowerCase() === tokenAddressLower);
+        if (isHolding) return false;
+
+        const isAlreadyTradedInSession =
+          this.sessionTradedTokens.has(tokenAddressLower) ||
+          this.state.tradeHistory.some((th) => th.tokenAddress.toLowerCase() === tokenAddressLower);
+        if (isAlreadyTradedInSession) return false;
 
         const evalResult = this.analysisEngine.evaluateToken(token);
-        if (evalResult.shouldBuy) {
-          await this.executeBuy(token, buyAmount, evalResult.reason, evalResult.score);
-          break; // One buy per cycle to manage risk
-        }
+        return evalResult.shouldBuy;
+      }).sort((a, b) => {
+        // Prioritize TAM match over partial
+        const aTam = a.iouMatch === 'TAM' ? 1 : 0;
+        const bTam = b.iouMatch === 'TAM' ? 1 : 0;
+        if (aTam !== bTam) return bTam - aTam;
+        // Then higher continuation probability
+        return b.continuationProbability - a.continuationProbability;
+      });
+
+      if (buyCandidates.length > 0) {
+        const bestCandidate = buyCandidates[0];
+        const evalResult = this.analysisEngine.evaluateToken(bestCandidate);
+        await this.executeBuy(bestCandidate, buyAmount, evalResult.reason, evalResult.score);
       }
     }
   }
@@ -192,20 +247,23 @@ export class TradingEngine {
     const remainingPositions: ActivePosition[] = [];
 
     for (const pos of this.state.activePositions) {
-      let marketToken = marketTokens.find(
-        (t) => t.address.toLowerCase() === pos.tokenAddress.toLowerCase()
-      );
-
-      // If token dropped from trending marketTokens, query GMGN by contract address
-      if (!marketToken) {
-        try {
-          const singleToken = await this.gmgnService.fetchTokenByAddress(pos.tokenAddress);
-          if (singleToken) {
-            marketToken = singleToken;
-          }
-        } catch (err) {
-          console.warn(`GMGN address query failed for ${pos.tokenAddress}:`, err);
+      // For active positions (SELL & Stop-Loss evaluation), query fresh live on-chain GMGN data
+      // directly by contract address (bypassCache=true) to eliminate general radar cache delays
+      let marketToken: ScannedToken | undefined = undefined;
+      try {
+        const liveToken = await this.gmgnService.fetchTokenByAddress(pos.tokenAddress, true);
+        if (liveToken) {
+          marketToken = liveToken;
         }
+      } catch (err) {
+        console.warn(`GMGN live address query failed for ${pos.tokenAddress}:`, err);
+      }
+
+      // Fallback to trending marketTokens or pos.currentPriceUsd if live single query fails
+      if (!marketToken) {
+        marketToken = marketTokens.find(
+          (t) => t.address.toLowerCase() === pos.tokenAddress.toLowerCase()
+        );
       }
 
       // Update current price & unrealized PnL
@@ -350,6 +408,7 @@ export class TradingEngine {
     };
 
     this.state.activePositions.push(newPosition);
+    this.sessionTradedTokens.add(token.address.toLowerCase());
 
     this.tradeCounter++;
     const tradeRecord: ExecutedTrade = {
