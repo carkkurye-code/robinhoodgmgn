@@ -200,8 +200,7 @@ async function startServer() {
 
   // Setup Vite dev server or serve static
   const distPath = path.join(process.cwd(), 'dist');
-  const hasDist = fs.existsSync(path.join(distPath, 'index.html'));
-  const isProduction = process.env.NODE_ENV === 'production' || (hasDist && process.env.NODE_ENV !== 'development');
+  const isProduction = process.env.NODE_ENV === 'production';
 
   if (isProduction) {
     app.use(express.static(distPath));

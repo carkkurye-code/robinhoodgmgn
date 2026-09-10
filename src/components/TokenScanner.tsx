@@ -14,6 +14,8 @@ import {
   Ban,
   CheckCircle2,
   AlertTriangle,
+  Copy,
+  Check,
 } from 'lucide-react';
 import type { ScannedToken } from '../types';
 
@@ -32,6 +34,39 @@ interface TokenScannerProps {
 
 export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime, radarStatus }) => {
   const [activeFilter, setActiveFilter] = useState<'ALL' | 'NEW' | 'IOU_TAM' | 'SATURATED'>('ALL');
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+
+  const handleCopyAddress = (e: React.MouseEvent, address: string) => {
+    e.stopPropagation();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(address).catch(() => {
+        fallbackCopyTextToClipboard(address);
+      });
+    } else {
+      fallbackCopyTextToClipboard(address);
+    }
+    setCopiedAddress(address);
+    setTimeout(() => {
+      setCopiedAddress((prev) => (prev === address ? null : prev));
+    }, 2000);
+  };
+
+  const fallbackCopyTextToClipboard = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Fallback copy failed:', err);
+    }
+    document.body.removeChild(textArea);
+  };
 
   const newCount = tokens.filter((t) => t.tokenStage === 'NEW_ENTRY').length;
   const iouTamCount = tokens.filter((t) => t.iouMatch === 'TAM').length;
@@ -219,8 +254,35 @@ export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime
                       <span className="font-bold text-white text-base">{token.symbol}</span>
                       <span className="text-xs text-slate-400 truncate max-w-[120px]">{token.name}</span>
                     </div>
-                    <div className="text-[10px] text-slate-500 font-mono truncate max-w-[200px]">
-                      {token.address}
+                    <div className="flex items-center space-x-2 mt-1">
+                      <span
+                        className="text-[11px] text-slate-400 font-mono truncate max-w-[155px]"
+                        title={token.address}
+                      >
+                        {token.address}
+                      </span>
+                      <button
+                        id={`copy-token-btn-${token.address}`}
+                        onClick={(e) => handleCopyAddress(e, token.address)}
+                        className={`inline-flex items-center space-x-1 px-1.5 py-0.5 rounded text-[10px] font-medium transition-all ${
+                          copiedAddress === token.address
+                            ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-500/50'
+                            : 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700'
+                        }`}
+                        title="Tam kontrat adresini kopyala"
+                      >
+                        {copiedAddress === token.address ? (
+                          <>
+                            <Check className="h-3 w-3 text-emerald-400" />
+                            <span>Kopyalandı</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="h-3 w-3 text-slate-400" />
+                            <span>Kopyala</span>
+                          </>
+                        )}
+                      </button>
                     </div>
                   </div>
 

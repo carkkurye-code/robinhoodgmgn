@@ -1,0 +1,128 @@
+{
+  "totalEvents": 727,
+  "totalTokens": 29,
+  "eventLevelStats": {
+    "modelA": {
+      "modelName": "Model A",
+      "totalDecisions": 727,
+      "buys": 0,
+      "passes": 727,
+      "buyRatio": "0.0%",
+      "winCount": 0,
+      "lossCount": 0,
+      "winRate": "0.0%",
+      "recoveredCount": 0,
+      "recoveryRate": "0.0%",
+      "collapsedCount": 0,
+      "collapseRate": "0.0%",
+      "totalPaperPnlUsd": "0.00",
+      "meanPnlPercent": "0.00%",
+      "medianPnlPercent": "0.00%",
+      "meanMaxGainPercent": "+0.0%",
+      "meanDrawdownPercent": "0.0%",
+      "worstDrawdownPercent": "0.0%",
+      "winLossRatio": "0.00"
+    },
+    "modelB1": {
+      "modelName": "Model B1",
+      "totalDecisions": 727,
+      "buys": 290,
+      "passes": 437,
+      "buyRatio": "39.9%",
+      "winCount": 119,
+      "lossCount": 171,
+      "winRate": "41.0%",
+      "recoveredCount": 110,
+      "recoveryRate": "37.9%",
+      "collapsedCount": 51,
+      "collapseRate": "17.6%",
+      "totalPaperPnlUsd": "-9.21",
+      "meanPnlPercent": "-3.17%",
+      "medianPnlPercent": "-3.21%",
+      "meanMaxGainPercent": "+18.6%",
+      "meanDrawdownPercent": "-19.7%",
+      "worstDrawdownPercent": "-81.1%",
+      "winLossRatio": "0.70"
+    },
+    "modelB2": {
+      "modelName": "Model B2",
+      "totalDecisions": 727,
+      "buys": 39,
+      "passes": 688,
+      "buyRatio": "5.4%",
+      "winCount": 16,
+      "lossCount": 23,
+      "winRate": "41.0%",
+      "recoveredCount": 13,
+      "recoveryRate": "33.3%",
+      "collapsedCount": 4,
+      "collapseRate": "10.3%",
+      "totalPaperPnlUsd": "0.99",
+      "meanPnlPercent": "2.53%",
+      "medianPnlPercent": "-1.64%",
+      "meanMaxGainPercent": "+21.4%",
+      "meanDrawdownPercent": "-17.5%",
+      "worstDrawdownPercent": "-43.6%",
+      "winLossRatio": "0.70"
+    }
+  },
+  "tokenLevelStats": {
+    "modelA": {
+      "totalTokens": 29,
+      "tokensTraded": 0,
+      "tokensPassed": 29,
+      "profitableTokens": 0,
+      "unprofitableTokens": 0,
+      "tokenWinRate": "0.0%",
+      "meanTokenPnl": "0.00%",
+      "medianTokenPnl": "0.00%"
+    },
+    "modelB1": {
+      "totalTokens": 29,
+      "tokensTraded": 16,
+      "tokensPassed": 13,
+      "profitableTokens": 8,
+      "unprofitableTokens": 8,
+      "tokenWinRate": "50.0%",
+      "meanTokenPnl": "-0.57%",
+      "medianTokenPnl": "-0.49%"
+    },
+    "modelB2": {
+      "totalTokens": 29,
+      "tokensTraded": 11,
+      "tokensPassed": 18,
+      "profitableTokens": 3,
+      "unprofitableTokens": 8,
+      "tokenWinRate": "27.3%",
+      "meanTokenPnl": "-0.03%",
+      "medianTokenPnl": "-2.93%"
+    }
+  },
+  "opportunityMetrics": {
+    "b2AvoidedCollapsesVsB1": 51,
+    "b2MissedRunnersVsB1": 36,
+    "b1AvoidedCollapsesVsMarket": 96,
+    "b1MissedRunnersVsMarket": 87,
+    "avgConfirmationDragPercent": "12.83%",
+    "mutualBuysCount": 39
+  },
+  "negativeControls": {
+    "doubleGreenCollapsesCount": 15,
+    "doubleGreenCollapsesRate": "10.4%",
+    "lowPrev15CollapsesCount": 87,
+    "lowPrev15CollapsesRate": "13.7%",
+    "lowVolLiqCollapsesCount": 100,
+    "lowVolLiqCollapsesRate": "15.2%",
+    "highPrev15RunnersCount": 46,
+    "highPrev15RunnersRate": "52.3%",
+    "b2LosingTradesCount": 23,
+    "b2TotalBuys": 39,
+    "sampleB2Loss": {
+      "token": "HEAVEN (0x73c2e5...)",
+      "pT0": 0.000018323007,
+      "pT2": 0.000020502031,
+      "retB2": "-14.9%",
+      "minB2": "-19.0%"
+    }
+  }
+}

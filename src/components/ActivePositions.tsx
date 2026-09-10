@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Wallet,
   ArrowUpRight,
   ArrowDownRight,
   Clock,
   Gauge,
+  Copy,
+  Check,
 } from 'lucide-react';
 import type { ActivePosition } from '../types';
 
@@ -13,6 +15,40 @@ interface ActivePositionsProps {
 }
 
 export const ActivePositions: React.FC<ActivePositionsProps> = ({ positions }) => {
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+
+  const handleCopyAddress = (e: React.MouseEvent, address: string) => {
+    e.stopPropagation();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(address).catch(() => {
+        fallbackCopyTextToClipboard(address);
+      });
+    } else {
+      fallbackCopyTextToClipboard(address);
+    }
+    setCopiedAddress(address);
+    setTimeout(() => {
+      setCopiedAddress((prev) => (prev === address ? null : prev));
+    }, 2000);
+  };
+
+  const fallbackCopyTextToClipboard = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Fallback copy failed:', err);
+    }
+    document.body.removeChild(textArea);
+  };
+
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
       <div className="flex items-center justify-between pb-4 border-b border-slate-800">
@@ -68,8 +104,32 @@ export const ActivePositions: React.FC<ActivePositionsProps> = ({ positions }) =
                         <span className="font-semibold text-white text-base">{pos.tokenSymbol}</span>
                         <span className="text-xs text-slate-400 truncate max-w-[100px]">{pos.tokenName}</span>
                       </div>
-                      <div className="text-[10px] text-slate-500 font-mono truncate max-w-[180px]">
-                        {pos.tokenAddress}
+                      <div className="flex items-center space-x-2 mt-1">
+                        <span className="text-[11px] text-slate-400 font-mono truncate max-w-[155px]" title={pos.tokenAddress}>
+                          {pos.tokenAddress}
+                        </span>
+                        <button
+                          id={`copy-pos-btn-${pos.tokenAddress}`}
+                          onClick={(e) => handleCopyAddress(e, pos.tokenAddress)}
+                          className={`inline-flex items-center space-x-1 px-1.5 py-0.5 rounded text-[10px] font-medium transition-all ${
+                            copiedAddress === pos.tokenAddress
+                              ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-500/50'
+                              : 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700'
+                          }`}
+                          title="Tam kontrat adresini kopyala"
+                        >
+                          {copiedAddress === pos.tokenAddress ? (
+                            <>
+                              <Check className="h-3 w-3 text-emerald-400" />
+                              <span>Kopyalandı</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="h-3 w-3 text-slate-400" />
+                              <span>Kopyala</span>
+                            </>
+                          )}
+                        </button>
                       </div>
                     </div>
 

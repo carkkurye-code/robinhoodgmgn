@@ -271,6 +271,20 @@ export class AnalysisEngine {
     // Token fiyatı düşse bile herhangi bir zarar yüzdesine göre satış yapılmaz.
     // Pozisyon, alıcı ivmesi tükenmesi veya güvenlik anomalisi oluşana kadar açık kalır.
 
+    // OTOMATİK SELL KURALI ($1 -> $2.38 Seviyesi):
+    // Her token için $1 ana para + yaklaşık $1 net kâr hedefi olacak şekilde $2.38 seviyesine ulaşıldığında otomatik SELL gerçekleşir.
+    const currentPrice = currentMarketToken ? currentMarketToken.priceUsd : position.currentPriceUsd;
+    const currentValueUsd = position.tokensHeld * currentPrice;
+    const targetValueUsd = position.usdtInvested > 0 ? position.usdtInvested * 2.38 : 2.38;
+
+    if (currentPrice > 0 && (currentValueUsd >= targetValueUsd || currentValueUsd >= 2.38)) {
+      return {
+        shouldExit: true,
+        reason: `Otomatik Kâr Hedefi Gerçekleşti: $${position.usdtInvested.toFixed(2)} → $${currentValueUsd.toFixed(2)} seviyesine ulaştı ($2.38 kuralı). Otomatik SELL.`,
+        newMomentumStatus: 'strong',
+      };
+    }
+
     if (!currentMarketToken) {
       return {
         shouldExit: false,
