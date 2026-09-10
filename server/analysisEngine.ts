@@ -107,14 +107,6 @@ export class AnalysisEngine {
     reason: string;
     newMomentumStatus: 'strong' | 'weakening' | 'exhausted';
   } {
-    if (!currentMarketToken) {
-      return {
-        shouldExit: false,
-        reason: 'Veri bekleniyor',
-        newMomentumStatus: position.momentumStatus,
-      };
-    }
-
     const pnl = position.unrealizedPnlPercent;
     // Prioritize net PnL if calculated on position, otherwise gross PnL
     const effectiveNetPnl = typeof position.unrealizedNetPnlPercent === 'number'
@@ -128,6 +120,25 @@ export class AnalysisEngine {
         shouldExit: true,
         reason: `Stop-Loss tetiklendi (Net K/Z: %${effectiveNetPnl.toFixed(2)} <= -%10.00). Kasa koruma amacıyla çıkıldı.`,
         newMomentumStatus: 'exhausted',
+      };
+    }
+
+    // Case 5: Kâr Koruma (Profit Protection)
+    // Bir açık pozisyon Net PnL olarak >= +%1.00 seviyesine çıktığında kâr koruma aktif olur.
+    // Kâr koruma aktif olduktan sonra Net PnL tekrar <= %0.00 olduğunda SELL edilir.
+    if (position.profitProtectionActive && effectiveNetPnl <= 0.00) {
+      return {
+        shouldExit: true,
+        reason: `Kâr koruma tetiklendi (Zirve Net: +%${(position.maxNetPnlPercentReached ?? 1).toFixed(2)}, mevcut Net: %${effectiveNetPnl.toFixed(2)} <= %0.00). Başa baş/kâr koruma ile çıkıldı.`,
+        newMomentumStatus: 'exhausted',
+      };
+    }
+
+    if (!currentMarketToken) {
+      return {
+        shouldExit: false,
+        reason: 'Veri bekleniyor',
+        newMomentumStatus: position.momentumStatus,
       };
     }
 
@@ -149,21 +160,21 @@ export class AnalysisEngine {
       };
     }
 
-    // Case 3: Prolonged weakening momentum
-    if (currentMarketToken.buyRatio1m < 0.50) {
-      return {
-        shouldExit: false,
-        reason: 'Alıcı baskısı hafif zayıflıyor; dinamik takip sürüyor.',
-        newMomentumStatus: 'weakening',
-      };
-    }
-
     // Case 4: High gain trailing momentum
     if (pnl >= 35 && currentMarketToken.priceChange1m < -2.0) {
       return {
         shouldExit: true,
         reason: `Yüksek kâr bölgesi (%${pnl.toFixed(1)}) sonrası 1 dakikalık düzeltme sinyali. Dinamik kâr realize edildi.`,
         newMomentumStatus: 'exhausted',
+      };
+    }
+
+    // Case 3: Prolonged weakening momentum
+    if (currentMarketToken.buyRatio1m < 0.50) {
+      return {
+        shouldExit: false,
+        reason: 'Alıcı baskısı hafif zayıflıyor; dinamik takip sürüyor.',
+        newMomentumStatus: 'weakening',
       };
     }
 

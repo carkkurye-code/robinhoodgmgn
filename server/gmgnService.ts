@@ -114,6 +114,56 @@ export class GMGNService {
     return this.generatePaperTokens();
   }
 
+  /**
+   * Fetch single token data by contract address (token info / pool / security)
+   */
+  public async fetchTokenByAddress(tokenAddress: string): Promise<ScannedToken | null> {
+    if (!tokenAddress) return null;
+    const normalized = tokenAddress.toLowerCase();
+
+    // 1. Check in-memory cached tokens
+    const cached = this.cachedTokens.find((t) => t.address.toLowerCase() === normalized);
+    if (cached) {
+      return cached;
+    }
+
+    // 2. Query official GMGN CLI for address-based token info if available
+    try {
+      const cliResult = spawnSync('gmgn-cli', [
+        'token',
+        'info',
+        '--chain',
+        'robinhood',
+        '--address',
+        tokenAddress,
+        '--raw',
+      ], {
+        encoding: 'utf8',
+        timeout: 7000,
+      });
+
+      if (!cliResult.error && cliResult.status === 0 && cliResult.stdout) {
+        const parsed = JSON.parse(cliResult.stdout);
+        const item = parsed?.data?.token || parsed?.data;
+        if (item && (item.price || item.address || item.token_address)) {
+          return this.mapGMGNToken(item);
+        }
+      }
+    } catch (err) {
+      console.warn(`GMGN CLI fetch error for ${tokenAddress}:`, err);
+    }
+
+    // 3. Check paper tokens template stream in case it matches a simulated token
+    const paperTokens = this.generatePaperTokens();
+    const paperMatch = paperTokens.find((t) => t.address.toLowerCase() === normalized);
+    if (paperMatch) {
+      return paperMatch;
+    }
+
+    // Return null if token is not found (do not invent fake prices)
+    return null;
+  }
+
   private mapGMGNToken(item: any): ScannedToken {
     const buys = Number(item.buys) || Number(item.buys_1m) || 0;
     const sells = Number(item.sells) || Number(item.sells_1m) || 0;

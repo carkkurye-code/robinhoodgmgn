@@ -1,12 +1,8 @@
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { TradingEngine } from './server/tradingEngine.js';
 import type { VerificationItem } from './server/types.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
@@ -97,8 +93,15 @@ async function startServer() {
   ];
 
   // API Routes
-  app.get('/api/status', (req, res) => {
-    res.json({ success: true, state: engine.getState() });
+  app.get(['/api/status', '/api/status/'], (req, res) => {
+    try {
+      const state = engine.getState();
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json({ success: true, state });
+    } catch (err: any) {
+      console.error('API /api/status error:', err);
+      res.status(500).json({ success: false, error: err?.message || 'Sunucu hatası' });
+    }
   });
 
   app.post('/api/bot/start', (req, res) => {
@@ -176,11 +179,17 @@ async function startServer() {
     res.json({ success: true, result });
   });
 
+  // Catch unmatched API routes to ensure they return JSON, never HTML
+  app.all('/api/*', (req, res) => {
+    res.status(404).json({ success: false, error: `API route not found: ${req.method} ${req.path}` });
+  });
+
   // Setup Vite dev server or serve static
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'dist')));
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath));
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+      res.sendFile(path.join(distPath, 'index.html'));
     });
   } else {
     const vite = await createViteServer({
@@ -195,7 +204,17 @@ async function startServer() {
   });
 }
 
+// Global process error handlers to prevent terminal/process crash
+process.on('uncaughtException', (err) => {
+  console.error('[Process Uncaught Exception]:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('[Process Unhandled Rejection]:', reason);
+});
+
 startServer().catch((err) => {
   console.error('Failed to start server:', err);
   process.exit(1);
 });
+

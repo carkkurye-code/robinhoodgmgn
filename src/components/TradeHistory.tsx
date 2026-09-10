@@ -54,9 +54,11 @@ export const TradeHistory: React.FC<TradeHistoryProps> = ({ trades }) => {
                 const isBuy = trade.action === 'BUY';
                 const hasPnl = trade.pnlPercent !== undefined;
                 const isProfit = (trade.pnlPercent || 0) >= 0;
+                // Primary key is trade.id; append trade.action as defensive guard for legacy records
+                const rowKey = trade.id.includes(trade.action.toLowerCase()) ? trade.id : `${trade.id}_${trade.action}`;
 
                 return (
-                  <tr key={trade.id} className="hover:bg-slate-850/50 transition-colors">
+                  <tr key={rowKey} className="hover:bg-slate-850/50 transition-colors">
                     <td className="py-3 px-3 font-mono text-slate-400 whitespace-nowrap">
                       {new Date(trade.timestamp).toLocaleTimeString('tr-TR')}
                     </td>

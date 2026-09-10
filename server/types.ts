@@ -62,6 +62,9 @@ export interface ActivePosition {
   costs: TradeCostDetails;
   momentumStatus: 'strong' | 'weakening' | 'exhausted';
   latestAnalysis: string;
+  maxNetPnlPercentReached?: number;
+  profitProtectionActive?: boolean;
+  profitProtectionActivatedAt?: number;
 }
 
 export interface ExecutedTrade {

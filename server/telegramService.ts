@@ -96,10 +96,12 @@ export class TelegramService {
           this.onTradeAmountChange(newAmount);
         }
 
+        const effectiveAmount = this.getTradeAmountFn ? this.getTradeAmountFn() : newAmount;
+
         await this.sendMessage(
           `✅ <b>İşlem Miktarı Güncellendi</b>\n` +
           `--------------------------------\n` +
-          `Sonraki alım emrinde kullanılacak tutar: <b>$${newAmount.toFixed(2)} USDT</b>\n` +
+          `Sonraki alım emrinde kullanılacak tutar: <b>$${effectiveAmount.toFixed(2)} USDT</b>\n` +
           `Çalışma Modu: <b>PAPER_TRADING</b>\n` +
           `<i>Yeni işlem büyüklüğü sisteme tanımlandı ve sonraki BUY işleminde kullanılacaktır.</i>`,
           incomingChatId
@@ -224,7 +226,7 @@ export class TelegramService {
 <b>İşlem Fiyatı:</b> $${trade.priceUsd.toFixed(6)}
 <b>${isBuy ? 'Alım Tutarı' : 'Satış Tutarı (Brüt)'}:</b> $${trade.usdtAmount.toFixed(2)} USDT (${trade.tokenAmount.toLocaleString()} Token)
 <b>Dinamik Skor:</b> %${trade.continuationScoreAtTrade}${pnlBlock}
-<b>SELL / İşlem Nedeni:</b> ${trade.reason}
+<b>${isBuy ? 'Alım' : 'Satış'} Nedeni:</b> ${trade.reason}
 --------------------------------
 <i>Bilgi: Telegram işlem cüzdanı değildir. İşlemler GMGN & Robinhood Chain üzerinden izlenir.</i>`;
 

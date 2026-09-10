@@ -1,7 +1,45 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { GMGNService } from './gmgnService.js';
 import { AnalysisEngine } from './analysisEngine.js';
 import { TelegramService } from './telegramService.js';
 import type { BotState, ScannedToken, ActivePosition, ExecutedTrade, ExecutionMode, GMGNConfig, TradeCostDetails } from './types.js';
+
+const SETTINGS_FILE_PATH = path.join(process.cwd(), 'server', 'bot-settings.json');
+
+function loadSavedTradeAmount(): number {
+  try {
+    if (fs.existsSync(SETTINGS_FILE_PATH)) {
+      const content = fs.readFileSync(SETTINGS_FILE_PATH, 'utf-8');
+      const data = JSON.parse(content);
+      if (typeof data.tradeAmountUsdt === 'number' && data.tradeAmountUsdt > 0 && isFinite(data.tradeAmountUsdt)) {
+        return data.tradeAmountUsdt;
+      }
+    }
+  } catch (err) {
+    console.error('[TradingEngine] Kayıtlı işlem miktarı okunamadı:', err);
+  }
+  return 50;
+}
+
+function saveTradeAmount(amount: number) {
+  try {
+    const dir = path.dirname(SETTINGS_FILE_PATH);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    let existingData: Record<string, any> = {};
+    if (fs.existsSync(SETTINGS_FILE_PATH)) {
+      try {
+        existingData = JSON.parse(fs.readFileSync(SETTINGS_FILE_PATH, 'utf-8'));
+      } catch {}
+    }
+    existingData.tradeAmountUsdt = amount;
+    fs.writeFileSync(SETTINGS_FILE_PATH, JSON.stringify(existingData, null, 2), 'utf-8');
+  } catch (err) {
+    console.error('[TradingEngine] İşlem miktarı kaydedilemedi:', err);
+  }
+}
 
 export class TradingEngine {
   private gmgnService: GMGNService;
@@ -10,11 +48,14 @@ export class TradingEngine {
 
   private state: BotState;
   private loopInterval: NodeJS.Timeout | null = null;
+  private tradeCounter = 0;
 
   constructor(config: GMGNConfig) {
     this.gmgnService = new GMGNService(config);
     this.analysisEngine = new AnalysisEngine();
     this.telegramService = new TelegramService(config.telegramBotToken, config.telegramChatId);
+
+    const initialTradeAmount = loadSavedTradeAmount();
 
     this.state = {
       isRunning: false,
@@ -24,7 +65,7 @@ export class TradingEngine {
       chainSlug: 'rh',
       balanceUsdt: 500,
       initialBalanceUsdt: 500,
-      tradeAmountUsdt: 50,
+      tradeAmountUsdt: initialTradeAmount,
       activePositions: [],
       scannedTokens: [],
       tradeHistory: [],
@@ -131,7 +172,7 @@ export class TradingEngine {
     await this.checkActivePositions(evaluatedTokens);
 
     // 4. Evaluate Dynamic Buy Opportunities (Max 3 open positions)
-    const buyAmount = this.state.tradeAmountUsdt || 50;
+    const buyAmount = this.getTradeAmount();
     if (this.state.activePositions.length < 3 && this.state.balanceUsdt >= buyAmount) {
       for (const token of evaluatedTokens) {
         // Must not already be holding
@@ -151,7 +192,21 @@ export class TradingEngine {
     const remainingPositions: ActivePosition[] = [];
 
     for (const pos of this.state.activePositions) {
-      const marketToken = marketTokens.find((t) => t.address === pos.tokenAddress);
+      let marketToken = marketTokens.find(
+        (t) => t.address.toLowerCase() === pos.tokenAddress.toLowerCase()
+      );
+
+      // If token dropped from trending marketTokens, query GMGN by contract address
+      if (!marketToken) {
+        try {
+          const singleToken = await this.gmgnService.fetchTokenByAddress(pos.tokenAddress);
+          if (singleToken) {
+            marketToken = singleToken;
+          }
+        } catch (err) {
+          console.warn(`GMGN address query failed for ${pos.tokenAddress}:`, err);
+        }
+      }
 
       // Update current price & unrealized PnL
       const currentPrice = marketToken ? marketToken.priceUsd : pos.currentPriceUsd;
@@ -214,7 +269,16 @@ export class TradingEngine {
         totalKnownCostsUsd,
       };
 
-      // Dynamic exit check (including -%10.00 Net Stop-Loss)
+      // Update per-position profit protection tracking
+      if (typeof pos.maxNetPnlPercentReached !== 'number' || netPnlPercent > pos.maxNetPnlPercentReached) {
+        pos.maxNetPnlPercentReached = netPnlPercent;
+      }
+      if (netPnlPercent >= 1.00 && !pos.profitProtectionActive) {
+        pos.profitProtectionActive = true;
+        pos.profitProtectionActivatedAt = Date.now();
+      }
+
+      // Dynamic exit check (including -%10.00 Net Stop-Loss and +%1.00 Profit Protection)
       const exitEvaluation = this.analysisEngine.evaluateExit(pos, marketToken);
       pos.momentumStatus = exitEvaluation.newMomentumStatus;
       pos.latestAnalysis = exitEvaluation.reason;
@@ -281,12 +345,15 @@ export class TradingEngine {
       costs: initialCosts,
       momentumStatus: 'strong',
       latestAnalysis: reason,
+      maxNetPnlPercentReached: -((initialCosts.totalKnownCostsUsd / usdtAmount) * 100),
+      profitProtectionActive: false,
     };
 
     this.state.activePositions.push(newPosition);
 
+    this.tradeCounter++;
     const tradeRecord: ExecutedTrade = {
-      id: `trade_${Date.now()}`,
+      id: `trade_buy_${Date.now()}_${this.tradeCounter}`,
       timestamp: Date.now(),
       action: 'BUY',
       tokenAddress: token.address,
@@ -371,8 +438,9 @@ export class TradingEngine {
     this.state.stats.winRate =
       (this.state.stats.profitableTrades / this.state.stats.totalTrades) * 100;
 
+    this.tradeCounter++;
     const tradeRecord: ExecutedTrade = {
-      id: `trade_${Date.now()}`,
+      id: `trade_sell_${Date.now()}_${this.tradeCounter}`,
       timestamp: Date.now(),
       action: 'SELL',
       tokenAddress: pos.tokenAddress,
@@ -413,11 +481,12 @@ export class TradingEngine {
   public setTradeAmount(amount: number) {
     if (amount > 0 && isFinite(amount)) {
       this.state.tradeAmountUsdt = amount;
-      console.log(`[TradingEngine] İşlem miktarı Telegram üzerinden $${amount} USDT olarak güncellendi.`);
+      saveTradeAmount(amount);
+      console.log(`[TradingEngine] İşlem miktarı $${amount} USDT olarak güncellendi ve kalıcı kaydedildi.`);
     }
   }
 
   public getTradeAmount(): number {
-    return this.state.tradeAmountUsdt || 50;
+    return this.state.tradeAmountUsdt || loadSavedTradeAmount();
   }
 }

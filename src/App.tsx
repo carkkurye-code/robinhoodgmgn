@@ -20,9 +20,10 @@ export default function App() {
   const fetchStatus = async () => {
     try {
       const res = await fetch('/api/status');
-      if (res.ok) {
+      const contentType = res.headers.get('content-type');
+      if (res.ok && contentType && contentType.includes('application/json')) {
         const data = await res.json();
-        if (data.success) {
+        if (data.success && data.state) {
           setBotState(data.state);
         }
       }
@@ -36,9 +37,10 @@ export default function App() {
     setIsVerifying(true);
     try {
       const res = await fetch('/api/verification');
-      if (res.ok) {
+      const contentType = res.headers.get('content-type');
+      if (res.ok && contentType && contentType.includes('application/json')) {
         const data = await res.json();
-        if (data.success) {
+        if (data.success && data.items) {
           setVerificationItems(data.items);
         }
       }
@@ -65,9 +67,12 @@ export default function App() {
     const endpoint = botState.isRunning ? '/api/bot/stop' : '/api/bot/start';
     try {
       const res = await fetch(endpoint, { method: 'POST' });
-      const data = await res.json();
-      if (data.success) {
-        setBotState(data.state);
+      const contentType = res.headers.get('content-type');
+      if (res.ok && contentType && contentType.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.state) {
+          setBotState(data.state);
+        }
       }
     } catch (err) {
       console.error('Bot başlatma/durdurma hatası:', err);
@@ -78,9 +83,12 @@ export default function App() {
     setIsScanning(true);
     try {
       const res = await fetch('/api/bot/scan-now', { method: 'POST' });
-      const data = await res.json();
-      if (data.success) {
-        setBotState(data.state);
+      const contentType = res.headers.get('content-type');
+      if (res.ok && contentType && contentType.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.state) {
+          setBotState(data.state);
+        }
       }
     } catch (err) {
       console.error('Anlık tarama hatası:', err);
@@ -93,9 +101,12 @@ export default function App() {
     if (confirm('Simülasyon bakiyesini ve işlem geçmişini $500 olarak sıfırlamak istiyor musunuz?')) {
       try {
         const res = await fetch('/api/bot/reset', { method: 'POST' });
-        const data = await res.json();
-        if (data.success) {
-          setBotState(data.state);
+        const contentType = res.headers.get('content-type');
+        if (res.ok && contentType && contentType.includes('application/json')) {
+          const data = await res.json();
+          if (data.success && data.state) {
+            setBotState(data.state);
+          }
         }
       } catch (err) {
         console.error('Sıfırlama hatası:', err);
