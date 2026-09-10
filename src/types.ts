@@ -7,8 +7,12 @@ export interface ScannedToken {
   priceUsd: number;
   marketCapUsd: number;
   liquidityUsd: number;
+  initialLiquidityUsd?: number;
   volume1m: number;
   volume5m: number;
+  buyVolume1m?: number;
+  sellVolume1m?: number;
+  buyVolumeRatio1m?: number; // 0 to 1 based on buy_volume_1m / (buy_volume_1m + sell_volume_1m)
   priceChange1m: number;
   priceChange5m: number;
   swaps1m: number;
@@ -21,9 +25,14 @@ export interface ScannedToken {
     top10HolderRate: number;
     buyTax: number;
     sellTax: number;
+    top70SniperHoldRate?: number;
+    botDegenRate?: number;
   };
   smartMoneyInflowUsd: number;
   poolCreatedAt: number;
+  firstDetectedAt?: number;
+  waitingFor5mCandle?: boolean;
+  timeRemaining5mMs?: number;
   tokenStage?: 'NEW_ENTRY' | 'SATURATED_HIGH_CAP' | 'RISKY';
   isNewOpportunity?: boolean;
   iouMatch?: 'TAM' | 'KISMİ' | 'DIŞI';

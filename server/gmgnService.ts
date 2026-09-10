@@ -224,14 +224,66 @@ export class GMGNService {
     const swaps = Number(item.swaps) || (priceObj ? Number(priceObj.swaps_1m) : 0) || Number(item.swaps_1m) || (buys + sells) || 1;
     const buyRatio = (buys + sells) > 0 ? buys / (buys + sells) : (item.buyRatio1m ?? 0.5);
 
+    // 1. Gerçek USD Buy/Sell Flow: GMGN'den buy_volume_1m ve sell_volume_1m
+    const rawBuyVol1m = item.buy_volume_1m !== undefined && item.buy_volume_1m !== null
+      ? Number(item.buy_volume_1m)
+      : (priceObj && priceObj.buy_volume_1m !== undefined && priceObj.buy_volume_1m !== null
+        ? Number(priceObj.buy_volume_1m)
+        : undefined);
+    const rawSellVol1m = item.sell_volume_1m !== undefined && item.sell_volume_1m !== null
+      ? Number(item.sell_volume_1m)
+      : (priceObj && priceObj.sell_volume_1m !== undefined && priceObj.sell_volume_1m !== null
+        ? Number(priceObj.sell_volume_1m)
+        : undefined);
+
+    const buyVolume1m = rawBuyVol1m !== undefined && !isNaN(rawBuyVol1m) ? rawBuyVol1m : undefined;
+    const sellVolume1m = rawSellVol1m !== undefined && !isNaN(rawSellVol1m) ? rawSellVol1m : undefined;
+
+    let buyVolumeRatio1m: number | undefined = undefined;
+    if (buyVolume1m !== undefined && sellVolume1m !== undefined) {
+      const totalVol1m = buyVolume1m + sellVolume1m;
+      if (totalVol1m > 0) {
+        buyVolumeRatio1m = buyVolume1m / totalVol1m;
+      }
+    }
+
     const rawVolume = Number(item.volume) || (priceObj ? Number(priceObj.volume_1m) : 0) || 0;
     const volume1m = Number(item.volume_1m) || (priceObj ? Number(priceObj.volume_1m) : 0) || (rawVolume > 0 ? rawVolume / 60 : 1200);
     const volume5m = Number(item.volume_5m) || (priceObj ? Number(priceObj.volume_5m) : 0) || (rawVolume > 0 ? (rawVolume / 60) * 5 : 5400);
 
-    const priceChange1m = Number(item.price_change_percent1m) || Number(item.price_change_1m) || 0;
-    const priceChange5m = Number(item.price_change_percent5m) || Number(item.price_change_5m) || 0;
+    const priceChange1m = Number(item.price_change_percent1m) || Number(item.price_change_1m) || (item.stat ? Number(item.stat.price_change_percent1m || item.stat.price_change_1m || 0) : 0) || (priceObj ? Number(priceObj.price_change_percent1m || priceObj.price_change_1m || 0) : 0) || 0;
+    const priceChange5m = Number(item.price_change_percent5m) || Number(item.price_change_5m) || (item.stat ? Number(item.stat.price_change_percent5m || item.stat.price_change_5m || 0) : 0) || (priceObj ? Number(priceObj.price_change_percent5m || priceObj.price_change_5m || 0) : 0) || 0;
+
+    // 2. Sniper / Bot Koruması: GMGN'den top70_sniper_hold_rate ve bot_degen_rate
+    const rawSniper = item.top70_sniper_hold_rate !== undefined && item.top70_sniper_hold_rate !== null
+      ? Number(item.top70_sniper_hold_rate)
+      : (item.stat?.top70_sniper_hold_rate !== undefined && item.stat?.top70_sniper_hold_rate !== null
+        ? Number(item.stat.top70_sniper_hold_rate)
+        : undefined);
+    const top70SniperHoldRate = rawSniper !== undefined && !isNaN(rawSniper) ? rawSniper : undefined;
+
+    const rawBotDegen = item.bot_degen_rate !== undefined && item.bot_degen_rate !== null
+      ? Number(item.bot_degen_rate)
+      : (item.stat?.bot_degen_rate !== undefined && item.stat?.bot_degen_rate !== null
+        ? Number(item.stat.bot_degen_rate)
+        : (item.top_bot_degen_percentage !== undefined && item.top_bot_degen_percentage !== null
+          ? Number(item.top_bot_degen_percentage)
+          : undefined));
+    const botDegenRate = rawBotDegen !== undefined && !isNaN(rawBotDegen) ? rawBotDegen : undefined;
 
     const top10 = Number(item.top_10_holder_rate) || Number(item.stat?.top_10_holder_rate) || 0.25;
+
+    // 3. Liquidity Drain Guard: GMGN'den initial_liquidity ve current liquidity
+    const rawInitLiq = item.initial_liquidity !== undefined && item.initial_liquidity !== null
+      ? Number(item.initial_liquidity)
+      : (item.pool && item.pool.initial_liquidity !== undefined && item.pool.initial_liquidity !== null
+        ? Number(item.pool.initial_liquidity)
+        : (item.stat && item.stat.initial_liquidity !== undefined && item.stat.initial_liquidity !== null
+          ? Number(item.stat.initial_liquidity)
+          : undefined));
+    const initialLiquidityUsd = rawInitLiq !== undefined && !isNaN(rawInitLiq) && rawInitLiq > 0 ? rawInitLiq : undefined;
+
+    const currentLiquidity = Number(item.liquidity) || (item.pool ? Number(item.pool.liquidity) : 25000);
 
     return {
       address: item.address || item.token_address,
@@ -239,9 +291,13 @@ export class GMGNService {
       name: item.name || 'Robinhood Token',
       priceUsd: currentPrice,
       marketCapUsd: Number(item.market_cap) || Number(item.usd_market_cap) || 100000,
-      liquidityUsd: Number(item.liquidity) || (item.pool ? Number(item.pool.liquidity) : 25000),
+      liquidityUsd: currentLiquidity,
+      initialLiquidityUsd,
       volume1m,
       volume5m,
+      buyVolume1m,
+      sellVolume1m,
+      buyVolumeRatio1m,
       priceChange1m,
       priceChange5m,
       swaps1m: Math.max(1, swaps),
@@ -254,6 +310,8 @@ export class GMGNService {
         top10HolderRate: top10,
         buyTax: Number(item.buy_tax) || 0,
         sellTax: Number(item.sell_tax) || 0,
+        top70SniperHoldRate,
+        botDegenRate,
       },
       smartMoneyInflowUsd: Number(item.smart_money_inflow) || (Number(item.smart_degen_count) || 0) * 100,
       poolCreatedAt: item.creation_timestamp

@@ -8,18 +8,7 @@ import type { BotState, ScannedToken, ActivePosition, ExecutedTrade, ExecutionMo
 const SETTINGS_FILE_PATH = path.join(process.cwd(), 'server', 'bot-settings.json');
 
 function loadSavedTradeAmount(): number {
-  try {
-    if (fs.existsSync(SETTINGS_FILE_PATH)) {
-      const content = fs.readFileSync(SETTINGS_FILE_PATH, 'utf-8');
-      const data = JSON.parse(content);
-      if (typeof data.tradeAmountUsdt === 'number' && data.tradeAmountUsdt > 0 && isFinite(data.tradeAmountUsdt)) {
-        return data.tradeAmountUsdt;
-      }
-    }
-  } catch (err) {
-    console.error('[TradingEngine] Kayıtlı işlem miktarı okunamadı:', err);
-  }
-  return 50;
+  return 1;
 }
 
 function saveTradeAmount(amount: number) {
@@ -34,7 +23,7 @@ function saveTradeAmount(amount: number) {
         existingData = JSON.parse(fs.readFileSync(SETTINGS_FILE_PATH, 'utf-8'));
       } catch {}
     }
-    existingData.tradeAmountUsdt = amount;
+    existingData.tradeAmountUsdt = 1;
     fs.writeFileSync(SETTINGS_FILE_PATH, JSON.stringify(existingData, null, 2), 'utf-8');
   } catch (err) {
     console.error('[TradingEngine] İşlem miktarı kaydedilemedi:', err);
@@ -50,6 +39,8 @@ export class TradingEngine {
   private loopInterval: NodeJS.Timeout | null = null;
   private tradeCounter = 0;
   private sessionTradedTokens: Set<string> = new Set();
+  // Token radar ilk tespit zamanı: tokenAddress (küçük harf) -> timestamp (ms)
+  private tokenFirstDetectedTimes: Map<string, number> = new Map();
 
   constructor(config: GMGNConfig) {
     this.gmgnService = new GMGNService(config);
@@ -105,8 +96,8 @@ export class TradingEngine {
       );
     }
     if (config.mode) {
-      // Keep live mode strictly safe
-      this.state.mode = config.mode;
+      // PAPER_TRADING dışında gerçek para ile işlem yapılmayacak
+      this.state.mode = 'PAPER_TRADING';
     }
   }
 
@@ -171,9 +162,22 @@ export class TradingEngine {
     }
 
     // 2. Run Dynamic Continuation & IOU Opportunity Analysis on each token
+    const FIVE_MINUTES_MS = 5 * 60 * 1000;
+    const now = Date.now();
+
     const evaluatedTokens: ScannedToken[] = rawTokens.map((token) => {
-      const evaluation = this.analysisEngine.evaluateToken(token);
       const tokenAddressLower = token.address.toLowerCase();
+
+      // Radar ilk tespit zamanını kaydet (mevcut değilse şu anki zamanı ata)
+      if (!this.tokenFirstDetectedTimes.has(tokenAddressLower)) {
+        this.tokenFirstDetectedTimes.set(tokenAddressLower, now);
+      }
+      const firstDetectedAt = this.tokenFirstDetectedTimes.get(tokenAddressLower)!;
+      const elapsedMs = now - firstDetectedAt;
+      const isFiveMinutesCompleted = elapsedMs >= FIVE_MINUTES_MS;
+      const timeRemaining5mMs = isFiveMinutesCompleted ? 0 : (FIVE_MINUTES_MS - elapsedMs);
+
+      const evaluation = this.analysisEngine.evaluateToken(token);
       const isAlreadyTradedInSession =
         this.sessionTradedTokens.has(tokenAddressLower) ||
         this.state.tradeHistory.some((th) => th.tokenAddress.toLowerCase() === tokenAddressLower);
@@ -181,6 +185,9 @@ export class TradingEngine {
       if (isAlreadyTradedInSession) {
         return {
           ...token,
+          firstDetectedAt,
+          waitingFor5mCandle: false,
+          timeRemaining5mMs: 0,
           continuationProbability: evaluation.score,
           continuationVerdict: evaluation.verdict,
           decisionReason: 'Token bu oturumda daha önce alınıp işlem gördü. Radar sonuçlarında tekrar listelenmesi yeni fırsat olarak sayılmaz (Tekrar alım engellendi).',
@@ -188,11 +195,15 @@ export class TradingEngine {
           isNewOpportunity: false,
           iouMatch: 'DIŞI' as const,
           iouMatchDetails: 'Oturumda işlem görmüş token (Yeniden alım engellendi)',
+          shouldBuy: false,
         };
       }
 
       return {
         ...token,
+        firstDetectedAt,
+        waitingFor5mCandle: false,
+        timeRemaining5mMs: 0,
         continuationProbability: evaluation.score,
         continuationVerdict: evaluation.verdict,
         decisionReason: evaluation.reason,
@@ -200,6 +211,7 @@ export class TradingEngine {
         isNewOpportunity: evaluation.isNewOpportunity,
         iouMatch: evaluation.iouMatch,
         iouMatchDetails: evaluation.iouMatchDetails,
+        shouldBuy: evaluation.shouldBuy,
       };
     });
 
@@ -210,10 +222,13 @@ export class TradingEngine {
       await this.checkActivePositions(evaluatedTokens);
     }
 
-    // 4. Evaluate Dynamic Buy Opportunities for New Entering Tokens (Sadece bot çalışıyorken, Max 3 açık pozisyon)
-    const buyAmount = this.getTradeAmount();
-    if (this.state.isRunning && this.state.activePositions.length < 3 && this.state.balanceUsdt >= buyAmount) {
-      // Sort candidates: prioritize newly entered opportunities with TAM IOU match
+    // 4. AnalysisEngine alım onayı almış tokenlardan maksimum 10 aktif pozisyona kadar 1 USDT paper alım yapılır
+    // Stop-loss tamamen kaldırılmıştır; pozisyon satış sinyali gelene kadar açık kalır.
+    const buyAmount = 1; // Her token için maksimum ayrılan alım miktarı 1 USDT
+    const MAX_ACTIVE_POSITIONS = 10;
+
+    if (this.state.isRunning && this.state.activePositions.length < MAX_ACTIVE_POSITIONS && this.state.balanceUsdt >= buyAmount) {
+      // AnalysisEngine evaluateToken() tarafından alım onayı verilmiş (shouldBuy === true) adayları belirle
       const buyCandidates = evaluatedTokens.filter((token) => {
         const tokenAddressLower = token.address.toLowerCase();
         const isHolding = this.state.activePositions.some((p) => p.tokenAddress.toLowerCase() === tokenAddressLower);
@@ -224,21 +239,71 @@ export class TradingEngine {
           this.state.tradeHistory.some((th) => th.tokenAddress.toLowerCase() === tokenAddressLower);
         if (isAlreadyTradedInSession) return false;
 
-        const evalResult = this.analysisEngine.evaluateToken(token);
-        return evalResult.shouldBuy;
+        // AnalysisEngine alım onayı şartı (shouldBuy === true)
+        return token.shouldBuy === true;
       }).sort((a, b) => {
-        // Prioritize TAM match over partial
+        // En yüksek potansiyelli ve dinamik skoru olan onaylı tokenları önceliklendir
         const aTam = a.iouMatch === 'TAM' ? 1 : 0;
         const bTam = b.iouMatch === 'TAM' ? 1 : 0;
         if (aTam !== bTam) return bTam - aTam;
-        // Then higher continuation probability
         return b.continuationProbability - a.continuationProbability;
       });
 
-      if (buyCandidates.length > 0) {
-        const bestCandidate = buyCandidates[0];
-        const evalResult = this.analysisEngine.evaluateToken(bestCandidate);
-        await this.executeBuy(bestCandidate, buyAmount, evalResult.reason, evalResult.score);
+      // 10 açık pozisyona ulaşana kadar onaylanan adaylardan 1 USDT paper alım yap
+      for (const candidate of buyCandidates) {
+        if (this.state.activePositions.length >= MAX_ACTIVE_POSITIONS) {
+          break;
+        }
+        if (this.state.balanceUsdt < buyAmount) {
+          break;
+        }
+
+        let latestCandidate = candidate;
+        try {
+          const freshToken = await this.gmgnService.fetchTokenByAddress(candidate.address, true);
+          if (freshToken) {
+            // Radar'dan gelen 1m/5m ivme ve ilk tespit zamanı verilerini koru (single-token endpoint 0 dönerse)
+            if (freshToken.priceChange1m === 0 && candidate.priceChange1m !== 0) {
+              freshToken.priceChange1m = candidate.priceChange1m;
+            }
+            if (freshToken.priceChange5m === 0 && candidate.priceChange5m !== 0) {
+              freshToken.priceChange5m = candidate.priceChange5m;
+            }
+            if (freshToken.volume5m === 0 && candidate.volume5m !== 0) {
+              freshToken.volume5m = candidate.volume5m;
+            }
+            freshToken.firstDetectedAt = candidate.firstDetectedAt;
+            latestCandidate = freshToken;
+          }
+        } catch {}
+
+        // BUY aşamasında GMGN'den alınan güncel token verisi de mevcut AnalysisEngine.evaluateToken() üzerinden TEKRAR değerlendirilir:
+        const freshEvaluation = this.analysisEngine.evaluateToken(latestCandidate);
+
+        // Güncel analiz sonuçlarını token nesnesine aktar
+        latestCandidate.continuationProbability = freshEvaluation.score;
+        latestCandidate.continuationVerdict = freshEvaluation.verdict;
+        latestCandidate.decisionReason = freshEvaluation.reason;
+        latestCandidate.tokenStage = freshEvaluation.tokenStage;
+        latestCandidate.isNewOpportunity = freshEvaluation.isNewOpportunity;
+        latestCandidate.iouMatch = freshEvaluation.iouMatch;
+        latestCandidate.iouMatchDetails = freshEvaluation.iouMatchDetails;
+        latestCandidate.shouldBuy = freshEvaluation.shouldBuy;
+
+        // AnalysisEngine güncel veride alımı onaylamıyorsa BUY yapılmaz, sonraki adaya geçilir
+        if (!freshEvaluation.shouldBuy) {
+          console.log(`[BUY Pas Geçildi] ${latestCandidate.symbol} güncel analizde onay alamadı: ${freshEvaluation.reason}`);
+          continue;
+        }
+
+        const calculatedScore = freshEvaluation.score;
+
+        await this.executeBuy(
+          latestCandidate,
+          buyAmount,
+          `1 USDT Yeni Token Deneme Stratejisi: Erken giriş fırsatı (Skor: %${calculatedScore}, Alıcı: %${Math.round(latestCandidate.buyRatio1m * 100)})`,
+          calculatedScore
+        );
       }
     }
   }
@@ -327,16 +392,12 @@ export class TradingEngine {
         totalKnownCostsUsd,
       };
 
-      // Update per-position profit protection tracking
+      // Zirve kâr takibi (istatistiksel amaçlı)
       if (typeof pos.maxNetPnlPercentReached !== 'number' || netPnlPercent > pos.maxNetPnlPercentReached) {
         pos.maxNetPnlPercentReached = netPnlPercent;
       }
-      if (netPnlPercent >= 1.00 && !pos.profitProtectionActive) {
-        pos.profitProtectionActive = true;
-        pos.profitProtectionActivatedAt = Date.now();
-      }
 
-      // Dynamic exit check (including -%10.00 Net Stop-Loss and +%1.00 Profit Protection)
+      // Dinamik çıkış kontrolü (Alıcı ivmesi tükenmesi veya Güvenlik anomalisi)
       const exitEvaluation = this.analysisEngine.evaluateExit(pos, marketToken);
       pos.momentumStatus = exitEvaluation.newMomentumStatus;
       pos.latestAnalysis = exitEvaluation.reason;
@@ -538,14 +599,21 @@ export class TradingEngine {
   }
 
   public setTradeAmount(amount: number) {
-    if (amount > 0 && isFinite(amount)) {
-      this.state.tradeAmountUsdt = amount;
-      saveTradeAmount(amount);
-      console.log(`[TradingEngine] İşlem miktarı $${amount} USDT olarak güncellendi ve kalıcı kaydedildi.`);
-    }
+    // 1 USDT deneme stratejisi: her token için maksimum ayrılan alım miktarı 1 USDT
+    this.state.tradeAmountUsdt = 1;
+    saveTradeAmount(1);
+    console.log('[TradingEngine] İşlem miktarı 1 USDT deneme stratejisi kapsamında $1 USDT olarak sabitlendi.');
   }
 
   public getTradeAmount(): number {
-    return this.state.tradeAmountUsdt || loadSavedTradeAmount();
+    return 1;
+  }
+
+  public getTokenFirstDetectedTime(tokenAddress: string): number | undefined {
+    return this.tokenFirstDetectedTimes.get(tokenAddress.toLowerCase());
+  }
+
+  public setTokenFirstDetectedTime(tokenAddress: string, timestamp: number): void {
+    this.tokenFirstDetectedTimes.set(tokenAddress.toLowerCase(), timestamp);
   }
 }

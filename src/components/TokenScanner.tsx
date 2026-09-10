@@ -268,7 +268,9 @@ export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime
                   <div className="mt-2 flex items-center justify-between">
                     <span
                       className={`text-[11px] px-2 py-0.5 rounded-full border font-medium ${
-                        isIouTam
+                        token.waitingFor5mCandle
+                          ? 'text-amber-300 bg-amber-950/80 border-amber-600'
+                          : isIouTam
                           ? 'text-emerald-300 bg-emerald-950/80 border-emerald-700'
                           : isSaturated
                           ? 'text-amber-300 bg-amber-950/80 border-amber-800'
@@ -277,7 +279,9 @@ export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime
                           : 'text-rose-400 bg-rose-950/80 border-rose-800'
                       }`}
                     >
-                      {isIouTam
+                      {token.waitingFor5mCandle
+                        ? `5m Mum Bekleniyor (${Math.ceil((token.timeRemaining5mMs || 0) / 1000)}s)`
+                        : isIouTam
                         ? 'Alım Uygun (IOU Fırsatı)'
                         : isSaturated
                         ? 'Alım YASAK (Doygun)'
@@ -285,9 +289,16 @@ export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime
                         ? 'Yüksek İvme (Onay Bekliyor)'
                         : 'Elendi / Riskli'}
                     </span>
-                    <span className="text-[11px] text-slate-400 font-mono">
-                      Alım Oranı: %{Math.round(token.buyRatio1m * 100)}
-                    </span>
+                    <div className="text-[11px] font-mono text-right">
+                      <span className="text-slate-400">
+                        İşlem Alım: %{Math.round(token.buyRatio1m * 100)}
+                      </span>
+                      {token.buyVolumeRatio1m !== undefined && (
+                        <span className={`ml-2 font-medium ${token.buyVolumeRatio1m >= 0.60 ? 'text-emerald-400' : token.buyVolumeRatio1m < 0.50 ? 'text-rose-400' : 'text-slate-300'}`}>
+                          • USD Akış: %{Math.round(token.buyVolumeRatio1m * 100)}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -307,6 +318,11 @@ export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime
                     <span className="text-slate-500">Likidite:</span>
                     <span className="font-mono text-slate-300 ml-1">
                       ${(token.liquidityUsd / 1000).toFixed(1)}k
+                      {token.initialLiquidityUsd ? (
+                        <span className="text-[10px] text-slate-500 ml-1">
+                          (İlk: ${(token.initialLiquidityUsd / 1000).toFixed(1)}k)
+                        </span>
+                      ) : null}
                     </span>
                   </div>
                   <div>
@@ -328,7 +344,7 @@ export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime
                 </div>
 
                 {/* Security checks */}
-                <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+                <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-1.5 text-[11px]">
                   <div className="flex items-center space-x-2">
                     {token.security.isHoneypot ? (
                       <span className="flex items-center space-x-1 text-rose-400 font-medium">
@@ -347,6 +363,24 @@ export const TokenScanner: React.FC<TokenScannerProps> = ({ tokens, lastScanTime
                     <span className="text-slate-400">
                       İlk 10: %{Math.round(token.security.top10HolderRate * 100)}
                     </span>
+
+                    {token.security.top70SniperHoldRate !== undefined && (
+                      <>
+                        <span className="text-slate-500">|</span>
+                        <span className="text-slate-400">
+                          Sniper: %{Math.round(token.security.top70SniperHoldRate * 100)}
+                        </span>
+                      </>
+                    )}
+
+                    {token.security.botDegenRate !== undefined && (
+                      <>
+                        <span className="text-slate-500">|</span>
+                        <span className="text-slate-400">
+                          Bot: %{Math.round(token.security.botDegenRate * 100)}
+                        </span>
+                      </>
+                    )}
                   </div>
 
                   <span className="text-[10px] font-mono text-slate-500">
