@@ -1,0 +1,129 @@
+export type ExecutionMode = 'PAPER_TRADING' | 'LIVE_EXECUTION';
+
+export interface ScannedToken {
+  address: string;
+  symbol: string;
+  name: string;
+  priceUsd: number;
+  marketCapUsd: number;
+  liquidityUsd: number;
+  volume1m: number;
+  volume5m: number;
+  priceChange1m: number;
+  priceChange5m: number;
+  swaps1m: number;
+  buyRatio1m: number; // 0 to 1
+  continuationProbability: number; // 0 to 100
+  continuationVerdict: 'HIGH_CONTINUATION' | 'MODERATE' | 'LOW_EXHAUSTED';
+  security: {
+    isHoneypot: boolean;
+    renouncedMint: boolean;
+    top10HolderRate: number;
+    buyTax: number;
+    sellTax: number;
+  };
+  smartMoneyInflowUsd: number;
+  poolCreatedAt: number;
+  actionTaken?: 'BOUGHT' | 'SKIPPED' | 'MONITORING';
+  decisionReason?: string;
+}
+
+export interface TradeCostDetails {
+  gmgnBuyFeeUsd: number; // 1% of BUY USDT amount
+  gmgnSellFeeUsd: number; // 1% of SELL gross USDT amount
+  buyGasUsd: number | null; // Real BUY gas if available from on-chain/GMGN quote, null if unknown
+  sellGasUsd: number | null; // Real SELL gas if available from on-chain/GMGN quote, null if unknown
+  buyTaxRate: number | null; // Real buy tax from GMGN token security
+  buyTaxUsd: number | null; // Buy tax amount
+  sellTaxRate: number | null; // Real sell tax from GMGN token security
+  sellTaxUsd: number | null; // Sell tax amount
+  slippageBuyPercent: number | null; // Realized slippage on buy if available
+  slippageSellPercent: number | null; // Realized slippage on sell if available
+  totalKnownCostsUsd: number;
+}
+
+export interface ActivePosition {
+  id: string;
+  tokenAddress: string;
+  tokenSymbol: string;
+  tokenName: string;
+  entryPriceUsd: number;
+  currentPriceUsd: number;
+  usdtInvested: number;
+  tokensHeld: number;
+  entryTime: number;
+  unrealizedGrossPnlPercent: number;
+  unrealizedGrossPnlUsd: number;
+  unrealizedNetPnlPercent: number;
+  unrealizedNetPnlUsd: number;
+  // Kept for backward compatibility
+  unrealizedPnlPercent: number;
+  unrealizedPnlUsd: number;
+  costs: TradeCostDetails;
+  momentumStatus: 'strong' | 'weakening' | 'exhausted';
+  latestAnalysis: string;
+}
+
+export interface ExecutedTrade {
+  id: string;
+  timestamp: number;
+  action: 'BUY' | 'SELL';
+  tokenAddress: string;
+  tokenSymbol: string;
+  tokenName: string;
+  priceUsd: number;
+  usdtAmount: number;
+  tokenAmount: number;
+  grossPnlPercent?: number;
+  grossPnlUsd?: number;
+  netPnlPercent?: number;
+  netPnlUsd?: number;
+  costs?: TradeCostDetails;
+  // Kept for backward compatibility
+  pnlPercent?: number;
+  pnlUsd?: number;
+  reason: string;
+  continuationScoreAtTrade: number;
+  telegramNotified: boolean;
+}
+
+export interface BotState {
+  isRunning: boolean;
+  mode: ExecutionMode;
+  chainId: number;
+  chainName: string;
+  chainSlug: string;
+  balanceUsdt: number;
+  initialBalanceUsdt: number;
+  tradeAmountUsdt: number;
+  activePositions: ActivePosition[];
+  scannedTokens: ScannedToken[];
+  tradeHistory: ExecutedTrade[];
+  lastScanTime: number;
+  stats: {
+    totalTrades: number;
+    profitableTrades: number;
+    lossTrades: number;
+    totalProfitUsd: number;
+    winRate: number;
+  };
+}
+
+export interface VerificationItem {
+  id: number;
+  title: string;
+  topic: string;
+  status: 'VERIFIED' | 'CODE_READY' | 'NOT_TESTED';
+  description: string;
+  diagnosticNote: string;
+}
+
+export interface GMGNConfig {
+  apiKey?: string;
+  privateKey?: string;
+  telegramBotToken?: string;
+  telegramChatId?: string;
+  mode: ExecutionMode;
+  chainId: number;
+  chainSlug: string;
+}
