@@ -1,0 +1,13 @@
+{
+  "contract": "0x0e6ec07405426455483a0374349fe5c450bb7777",
+  "tokenSymbol": "WASB",
+  "decidedAt": "2026-09-11T14:53:01.831Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Alıcı oranı verisi mevcut değil (DATA_UNAVAILABLE) - İzlemede"
+  ],
+  "observedMarketCap": 0,
+  "observedLiquidity": 9987.754586770921,
+  "availableFeaturesCount": 4,
+  "unavailableFeaturesCount": 1
+}

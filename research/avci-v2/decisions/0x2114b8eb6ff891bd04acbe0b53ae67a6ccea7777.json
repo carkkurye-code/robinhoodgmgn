@@ -1,0 +1,13 @@
+{
+  "contract": "0x2114b8eb6ff891bd04acbe0b53ae67a6ccea7777",
+  "tokenSymbol": "MINE",
+  "decidedAt": "2026-09-11T14:53:01.830Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Likidite çok sığ ($0) - Yüksek slippage riski"
+  ],
+  "observedMarketCap": 4962.79,
+  "observedLiquidity": 0,
+  "availableFeaturesCount": 4,
+  "unavailableFeaturesCount": 1
+}

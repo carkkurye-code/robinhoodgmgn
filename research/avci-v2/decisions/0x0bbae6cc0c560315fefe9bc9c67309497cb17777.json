@@ -1,0 +1,13 @@
+{
+  "contract": "0x0bbae6cc0c560315fefe9bc9c67309497cb17777",
+  "tokenSymbol": "AF",
+  "decidedAt": "2026-09-11T14:53:01.831Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Alıcı oranı verisi mevcut değil (DATA_UNAVAILABLE) - İzlemede"
+  ],
+  "observedMarketCap": 0,
+  "observedLiquidity": 9987.794836608775,
+  "availableFeaturesCount": 4,
+  "unavailableFeaturesCount": 1
+}

@@ -1,0 +1,57 @@
+{
+  "token": "RYANHOOD",
+  "contract": "0xaedaff41df58261f9d5b7991e79cdb07ecdc7777",
+  "observedAt": "2026-09-11T14:53:02.393Z",
+  "elapsedSeconds": 241,
+  "discoveryType": "EARLY_DISCOVERY",
+  "dataSource": "LIVE_DISCOVERY",
+  "market": {
+    "price": 0.0000049477038,
+    "marketCap": 4947.7,
+    "liquidity": 0.004000877496883431,
+    "volume": 0,
+    "liquidityMcRatio": 0,
+    "estimatedPriceImpact": 24994.5168
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "buyerRatioStatus": "DATA_UNAVAILABLE",
+    "transactionCount": 1
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": 2,
+    "botRatio": 0,
+    "entrapmentRatio": 0,
+    "bundlerWallets": 0,
+    "smartWallets": null,
+    "whaleWallets": null,
+    "freshWallets": 0
+  },
+  "creator": {
+    "address": "0xb3023412cf5fe15811a158234e3fd70a7d6b6666",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0,
+    "buyTax": 0.0899,
+    "sellTax": 0.0899
+  },
+  "availability": {
+    "historical": false,
+    "decisionTimeAvailable": "POST_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": 0,
+    "priceAccelerationPct": 0,
+    "liquidityDelta": 0,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "contract": "0xc4a52e1e9ceb819f86cbe9c78aecc664cfbb1e18",
+  "symbol": "INDEX",
+  "name": "Index Cooperative",
+  "discoveryType": "MICRO_CAP",
+  "dataSource": "LIVE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T14:47:01.599Z",
+  "t0MarketCap": 0,
+  "t0Liquidity": 0,
+  "t0Price": 0,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T14:47:01.599Z",
+  "creator": {
+    "address": "0x6c54aacdc7ec60a110191d01e1065001897c262e",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0,
+    "buyTax": 0,
+    "sellTax": 0
+  },
+  "decision": "WATCH"
+}

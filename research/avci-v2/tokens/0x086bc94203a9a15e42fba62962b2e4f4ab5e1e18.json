@@ -1,0 +1,26 @@
+{
+  "contract": "0x086bc94203a9a15e42fba62962b2e4f4ab5e1e18",
+  "symbol": "MINTYXYZ",
+  "name": "minty.xyz",
+  "discoveryType": "MICRO_CAP",
+  "dataSource": "LIVE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T14:40:00.173Z",
+  "t0MarketCap": 0,
+  "t0Liquidity": 0,
+  "t0Price": 0,
+  "snapshotsCount": 27,
+  "lastSnapshotAt": "2026-09-11T14:53:04.030Z",
+  "creator": {
+    "address": "0xd4bdeb11f4c34d9dffe9e2e5e3c22377715408cc",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0,
+    "buyTax": 0,
+    "sellTax": 0
+  },
+  "decision": "WATCH"
+}

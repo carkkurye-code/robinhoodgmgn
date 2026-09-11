@@ -1,0 +1,57 @@
+{
+  "token": "CRAMER",
+  "contract": "0xf810136c7972b85da543ebac02c1dfecd6977777",
+  "observedAt": "2026-09-11T14:53:02.101Z",
+  "elapsedSeconds": 91,
+  "discoveryType": "EARLY_DISCOVERY",
+  "dataSource": "LIVE_DISCOVERY",
+  "market": {
+    "price": 0.0000049483897,
+    "marketCap": 4948.39,
+    "liquidity": 9961.196312694095,
+    "volume": 0,
+    "liquidityMcRatio": 2.013,
+    "estimatedPriceImpact": 0.01
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "buyerRatioStatus": "DATA_UNAVAILABLE",
+    "transactionCount": 1
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": 2,
+    "botRatio": 0,
+    "entrapmentRatio": 0,
+    "bundlerWallets": 0,
+    "smartWallets": null,
+    "whaleWallets": null,
+    "freshWallets": 0
+  },
+  "creator": {
+    "address": "0x948ed9814055e4b74c3885f2de1599600b206666",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0,
+    "buyTax": 0.0899,
+    "sellTax": 0.0899
+  },
+  "availability": {
+    "historical": false,
+    "decisionTimeAvailable": "POST_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": 0,
+    "priceAccelerationPct": 0,
+    "liquidityDelta": 0,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

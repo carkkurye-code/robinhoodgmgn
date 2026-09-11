@@ -1,0 +1,26 @@
+{
+  "contract": "0x6e6f9aecf1ad3a4dd2fdb76896c813e5991b1e18",
+  "symbol": "MLNTY",
+  "name": "minty.xyz",
+  "discoveryType": "MICRO_CAP",
+  "dataSource": "LIVE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T14:40:00.174Z",
+  "t0MarketCap": 0,
+  "t0Liquidity": 0,
+  "t0Price": 0,
+  "snapshotsCount": 27,
+  "lastSnapshotAt": "2026-09-11T14:53:04.102Z",
+  "creator": {
+    "address": "0x948d1eea3dbc7e893a571e51879ea5e35fba334e",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0,
+    "buyTax": 0,
+    "sellTax": 0
+  },
+  "decision": "WATCH"
+}

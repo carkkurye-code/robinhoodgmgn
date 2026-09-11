@@ -1,0 +1,57 @@
+{
+  "token": "BULLFLY",
+  "contract": "0x401d32f1bfa8f82092f9d07c6f31b9b5d8f47777",
+  "observedAt": "2026-09-11T14:53:02.222Z",
+  "elapsedSeconds": 121,
+  "discoveryType": "EARLY_DISCOVERY",
+  "dataSource": "LIVE_DISCOVERY",
+  "market": {
+    "price": 0.0000049502747,
+    "marketCap": 4950.27,
+    "liquidity": 3.5250898689166146,
+    "volume": 1.94,
+    "liquidityMcRatio": 0.0007,
+    "estimatedPriceImpact": 28.3681
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "buyerRatioStatus": "DATA_UNAVAILABLE",
+    "transactionCount": 2
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": 3,
+    "botRatio": 0.0004,
+    "entrapmentRatio": 0.0004,
+    "bundlerWallets": 0,
+    "smartWallets": null,
+    "whaleWallets": null,
+    "freshWallets": 0
+  },
+  "creator": {
+    "address": "0x5bbb332a7ea0bbc98424304326c3dce71d8b6666",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0.0004,
+    "buyTax": 0.0899,
+    "sellTax": 0.0899
+  },
+  "availability": {
+    "historical": false,
+    "decisionTimeAvailable": "POST_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": 0,
+    "priceAccelerationPct": 0,
+    "liquidityDelta": 0,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

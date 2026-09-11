@@ -1,0 +1,26 @@
+{
+  "contract": "0x80ec968fe2636a48e2900e7bfcae1ece2afb1e18",
+  "symbol": "SECURITITTIIES",
+  "name": "SECURITITTIES",
+  "discoveryType": "MICRO_CAP",
+  "dataSource": "LIVE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T14:40:00.174Z",
+  "t0MarketCap": 0,
+  "t0Liquidity": 0,
+  "t0Price": 0,
+  "snapshotsCount": 28,
+  "lastSnapshotAt": "2026-09-11T14:53:33.602Z",
+  "creator": {
+    "address": "0x72655753b8e66ad8b5757f0f71cc76ff9b3d8a7f",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0,
+    "buyTax": 0,
+    "sellTax": 0
+  },
+  "decision": "WATCH"
+}

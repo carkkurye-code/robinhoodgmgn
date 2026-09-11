@@ -1,0 +1,57 @@
+{
+  "token": "USWS",
+  "contract": "0x34fd55cb8ac32a795e7dc69e1789fda339937777",
+  "observedAt": "2026-09-11T14:53:02.620Z",
+  "elapsedSeconds": 241,
+  "discoveryType": "EARLY_DISCOVERY",
+  "dataSource": "LIVE_DISCOVERY",
+  "market": {
+    "price": 0.0000049480085,
+    "marketCap": 4948.01,
+    "liquidity": 0.0032946470181613036,
+    "volume": 0,
+    "liquidityMcRatio": 0,
+    "estimatedPriceImpact": 30352.2652
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "buyerRatioStatus": "DATA_UNAVAILABLE",
+    "transactionCount": 1
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": 2,
+    "botRatio": 0,
+    "entrapmentRatio": 0,
+    "bundlerWallets": 0,
+    "smartWallets": null,
+    "whaleWallets": null,
+    "freshWallets": 0
+  },
+  "creator": {
+    "address": "0x8f96447d5d15571bc18705b2f1f09aec1b376666",
+    "holdRate": null,
+    "status": null
+  },
+  "security": {
+    "isHoneypot": null,
+    "renouncedMint": null,
+    "top10HolderRate": 0,
+    "buyTax": 0.0899,
+    "sellTax": 0.0899
+  },
+  "availability": {
+    "historical": false,
+    "decisionTimeAvailable": "POST_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": 0,
+    "priceAccelerationPct": 0,
+    "liquidityDelta": 0,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}
