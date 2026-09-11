@@ -1,0 +1,13 @@
+{
+  "contract": "0x5340f5bec3a26772288c3b131649be8dddfcfba3",
+  "tokenSymbol": "DESK",
+  "decidedAt": "2026-09-10T16:27:15.000Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Bekleme kriterinde"
+  ],
+  "observedMarketCap": 40319.189000000006,
+  "observedLiquidity": 19134.23638740145,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

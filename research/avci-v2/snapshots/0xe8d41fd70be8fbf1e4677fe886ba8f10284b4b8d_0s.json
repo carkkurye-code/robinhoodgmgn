@@ -1,0 +1,40 @@
+{
+  "token": "FALCHION",
+  "contract": "0xe8d41fd70be8fbf1e4677fe886ba8f10284b4b8d",
+  "observedAt": "2026-09-10T18:36:13.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "EARLY_DISCOVERY",
+  "market": {
+    "price": 0.000049608854,
+    "marketCap": 49608.854,
+    "liquidity": 274.4322951469212,
+    "volume": 2017.71128043,
+    "liquidityMcRatio": 0.0055,
+    "estimatedPriceImpact": 0.3644
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

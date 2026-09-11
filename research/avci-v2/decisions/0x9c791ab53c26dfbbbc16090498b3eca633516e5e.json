@@ -1,0 +1,13 @@
+{
+  "contract": "0x9c791ab53c26dfbbbc16090498b3eca633516e5e",
+  "tokenSymbol": "Rivra",
+  "decidedAt": "2026-09-10T19:49:39.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($79,955.905) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 79955.905,
+  "observedLiquidity": 919.628502207093,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

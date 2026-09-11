@@ -1,0 +1,40 @@
+{
+  "token": "DELEGATE",
+  "contract": "0x8080e6230bae1f09cca3665f2c083faa794069ed",
+  "observedAt": "2026-09-10T21:00:36.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.00006273269,
+    "marketCap": 62732.69,
+    "liquidity": 468.5681644445808,
+    "volume": 2032.085245342,
+    "liquidityMcRatio": 0.0075,
+    "estimatedPriceImpact": 0.2134
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

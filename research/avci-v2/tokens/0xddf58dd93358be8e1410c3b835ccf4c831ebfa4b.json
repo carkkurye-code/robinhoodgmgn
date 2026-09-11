@@ -1,0 +1,13 @@
+{
+  "contract": "0xddf58dd93358be8e1410c3b835ccf4c831ebfa4b",
+  "symbol": "GAIN",
+  "name": "Global Asset Investment Network",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-10T16:34:06.000Z",
+  "t0MarketCap": 50225.448,
+  "t0Liquidity": 30.91334874323867,
+  "t0Price": 0.000050225448,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T16:34:06.000Z",
+  "decision": "REJECT"
+}

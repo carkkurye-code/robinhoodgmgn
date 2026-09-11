@@ -1,0 +1,13 @@
+{
+  "contract": "0x6a409c5b09754437ee50be27892fc8d04cbd044e",
+  "symbol": "LMEOW",
+  "name": "LMEOW",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T04:06:52.000Z",
+  "t0MarketCap": 55289.308000000005,
+  "t0Liquidity": 40.595168124501924,
+  "t0Price": 0.000055289308,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T04:06:52.000Z",
+  "decision": "REJECT"
+}

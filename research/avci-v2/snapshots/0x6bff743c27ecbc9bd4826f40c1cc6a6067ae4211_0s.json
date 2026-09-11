@@ -1,0 +1,40 @@
+{
+  "token": "SHELL",
+  "contract": "0x6bff743c27ecbc9bd4826f40c1cc6a6067ae4211",
+  "observedAt": "2026-09-11T02:26:06.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000054579535,
+    "marketCap": 54579.534999999996,
+    "liquidity": 667.7929815260281,
+    "volume": 482.25877632,
+    "liquidityMcRatio": 0.0122,
+    "estimatedPriceImpact": 0.1497
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

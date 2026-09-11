@@ -1,0 +1,40 @@
+{
+  "token": "TOESHARK",
+  "contract": "0x3f9909b03d0a67fea2363c786ba930da8bf237b3",
+  "observedAt": "2026-09-10T19:05:15.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000052223342,
+    "marketCap": 52223.342,
+    "liquidity": 140.43057085518652,
+    "volume": 1696.57658849,
+    "liquidityMcRatio": 0.0027,
+    "estimatedPriceImpact": 0.7121
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

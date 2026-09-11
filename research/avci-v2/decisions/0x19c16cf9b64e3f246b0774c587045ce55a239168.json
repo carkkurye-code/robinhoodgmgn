@@ -1,0 +1,13 @@
+{
+  "contract": "0x19c16cf9b64e3f246b0774c587045ce55a239168",
+  "tokenSymbol": "DICE",
+  "decidedAt": "2026-09-11T08:32:05.000Z",
+  "decision": "EARLY_BUY_CANDIDATE",
+  "reasons": [
+    "Hedef erken aşama ($13,237.265 MC), yeterli likidite ($2,048.92)"
+  ],
+  "observedMarketCap": 13237.265000000001,
+  "observedLiquidity": 2048.920256040897,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

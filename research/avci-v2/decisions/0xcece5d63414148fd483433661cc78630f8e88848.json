@@ -1,0 +1,13 @@
+{
+  "contract": "0xcece5d63414148fd483433661cc78630f8e88848",
+  "tokenSymbol": "ZOIN",
+  "decidedAt": "2026-09-10T17:50:30.000Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Likidite çok sığ ($30.099) - Yüksek slippage riski"
+  ],
+  "observedMarketCap": 47512.119,
+  "observedLiquidity": 30.09946407997848,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

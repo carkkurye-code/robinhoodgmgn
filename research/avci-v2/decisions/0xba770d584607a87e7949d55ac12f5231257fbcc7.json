@@ -1,0 +1,13 @@
+{
+  "contract": "0xba770d584607a87e7949d55ac12f5231257fbcc7",
+  "tokenSymbol": "TRUMP28",
+  "decidedAt": "2026-09-10T15:38:13.000Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Likidite çok sığ ($376.071) - Yüksek slippage riski"
+  ],
+  "observedMarketCap": 49270.701,
+  "observedLiquidity": 376.07133846278043,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

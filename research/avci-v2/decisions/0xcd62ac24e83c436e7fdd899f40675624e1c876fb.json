@@ -1,0 +1,13 @@
+{
+  "contract": "0xcd62ac24e83c436e7fdd899f40675624e1c876fb",
+  "tokenSymbol": "MUSK",
+  "decidedAt": "2026-09-11T08:32:38.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($62,688.929) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 62688.929,
+  "observedLiquidity": 536.328119203917,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

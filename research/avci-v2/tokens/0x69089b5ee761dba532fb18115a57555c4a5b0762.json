@@ -1,0 +1,13 @@
+{
+  "contract": "0x69089b5ee761dba532fb18115a57555c4a5b0762",
+  "symbol": "POPCAT",
+  "name": "Popcat",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T02:38:36.000Z",
+  "t0MarketCap": 111418.64,
+  "t0Liquidity": 201.89955821701375,
+  "t0Price": 0.00011141864,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T02:38:36.000Z",
+  "decision": "REJECT"
+}

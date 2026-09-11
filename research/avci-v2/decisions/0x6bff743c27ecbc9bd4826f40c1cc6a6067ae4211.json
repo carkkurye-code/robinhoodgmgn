@@ -1,0 +1,13 @@
+{
+  "contract": "0x6bff743c27ecbc9bd4826f40c1cc6a6067ae4211",
+  "tokenSymbol": "SHELL",
+  "decidedAt": "2026-09-11T02:26:06.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($54,579.535) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 54579.534999999996,
+  "observedLiquidity": 667.7929815260281,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

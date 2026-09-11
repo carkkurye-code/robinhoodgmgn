@@ -1,0 +1,13 @@
+{
+  "contract": "0x0db006726c49a501d787d4e7c250c7d62611253a",
+  "tokenSymbol": "UFD",
+  "decidedAt": "2026-09-11T04:35:51.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($56,254.433) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 56254.433,
+  "observedLiquidity": 992.3764571723667,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

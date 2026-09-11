@@ -1,0 +1,13 @@
+{
+  "contract": "0x49c6cd103db47798a286c6798adbd5c662e36f13",
+  "tokenSymbol": "PONSHOOD",
+  "decidedAt": "2026-09-11T04:29:42.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($54,300.503) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 54300.503000000004,
+  "observedLiquidity": 110.34533801929697,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

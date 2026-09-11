@@ -1,0 +1,40 @@
+{
+  "token": "PredictQ",
+  "contract": "0x26c583ccaae2ac307b9dd491186571f62902cfcf",
+  "observedAt": "2026-09-10T16:02:29.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "EARLY_DISCOVERY",
+  "market": {
+    "price": 0.000048449846,
+    "marketCap": 48449.846,
+    "liquidity": 496.2222648870716,
+    "volume": 138.29714656,
+    "liquidityMcRatio": 0.0102,
+    "estimatedPriceImpact": 0.2015
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

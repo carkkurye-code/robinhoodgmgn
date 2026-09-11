@@ -1,0 +1,13 @@
+{
+  "contract": "0x49811202e73b8d2e602e7cc0107fe9dee24cb022",
+  "tokenSymbol": "MARA",
+  "decidedAt": "2026-09-11T04:55:08.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($54,046.374) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 54046.374,
+  "observedLiquidity": 533.8700601007338,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

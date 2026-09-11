@@ -1,0 +1,13 @@
+{
+  "contract": "0x60e000fa8235fc71e2c4ef9c9c1481759a4fcd70",
+  "symbol": "Stock",
+  "name": "Stock Perps",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-11T06:39:00.000Z",
+  "t0MarketCap": 42798.287,
+  "t0Liquidity": 605.6472897253636,
+  "t0Price": 0.000042798287,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T06:39:00.000Z",
+  "decision": "WATCH"
+}

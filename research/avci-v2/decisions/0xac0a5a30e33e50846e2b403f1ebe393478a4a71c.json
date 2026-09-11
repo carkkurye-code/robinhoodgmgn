@@ -1,0 +1,13 @@
+{
+  "contract": "0xac0a5a30e33e50846e2b403f1ebe393478a4a71c",
+  "tokenSymbol": "MARSCOIN",
+  "decidedAt": "2026-09-11T06:10:58.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($55,524.486) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 55524.486000000004,
+  "observedLiquidity": 1176.638886508864,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

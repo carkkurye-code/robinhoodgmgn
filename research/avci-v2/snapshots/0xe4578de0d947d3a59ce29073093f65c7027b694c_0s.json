@@ -1,0 +1,40 @@
+{
+  "token": "BOSS",
+  "contract": "0xe4578de0d947d3a59ce29073093f65c7027b694c",
+  "observedAt": "2026-09-11T08:40:14.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000052649343,
+    "marketCap": 52649.343,
+    "liquidity": 238.78990943824832,
+    "volume": 643.73540566,
+    "liquidityMcRatio": 0.0045,
+    "estimatedPriceImpact": 0.4188
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

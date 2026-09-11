@@ -1,0 +1,13 @@
+{
+  "contract": "0x8080e6230bae1f09cca3665f2c083faa794069ed",
+  "tokenSymbol": "DELEGATE",
+  "decidedAt": "2026-09-10T21:00:36.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($62,732.69) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 62732.69,
+  "observedLiquidity": 468.5681644445808,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

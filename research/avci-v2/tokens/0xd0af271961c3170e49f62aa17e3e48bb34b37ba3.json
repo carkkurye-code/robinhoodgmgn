@@ -1,0 +1,13 @@
+{
+  "contract": "0xd0af271961c3170e49f62aa17e3e48bb34b37ba3",
+  "symbol": "imdbot",
+  "name": "imdbot",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-10T19:45:38.000Z",
+  "t0MarketCap": 117183.86,
+  "t0Liquidity": 4379.077225783821,
+  "t0Price": 0.0000011718386,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T19:45:38.000Z",
+  "decision": "REJECT"
+}

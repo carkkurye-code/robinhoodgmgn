@@ -1,0 +1,13 @@
+{
+  "contract": "0x6bff743c27ecbc9bd4826f40c1cc6a6067ae4211",
+  "symbol": "SHELL",
+  "name": "Shell Protocol",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T02:26:06.000Z",
+  "t0MarketCap": 54579.534999999996,
+  "t0Liquidity": 667.7929815260281,
+  "t0Price": 0.000054579535,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T02:26:06.000Z",
+  "decision": "REJECT"
+}

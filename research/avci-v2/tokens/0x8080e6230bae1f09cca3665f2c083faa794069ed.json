@@ -1,0 +1,13 @@
+{
+  "contract": "0x8080e6230bae1f09cca3665f2c083faa794069ed",
+  "symbol": "DELEGATE",
+  "name": "Delegate AI",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-10T21:00:36.000Z",
+  "t0MarketCap": 62732.69,
+  "t0Liquidity": 468.5681644445808,
+  "t0Price": 0.00006273269,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T21:00:36.000Z",
+  "decision": "REJECT"
+}

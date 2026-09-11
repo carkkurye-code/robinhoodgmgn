@@ -1,0 +1,40 @@
+{
+  "token": "KISHU",
+  "contract": "0x891e611987d4546d8ef57dfa9f1b371811d0fa99",
+  "observedAt": "2026-09-11T07:52:53.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000055895912,
+    "marketCap": 55895.912000000004,
+    "liquidity": 533.9576674297298,
+    "volume": 424.34181648,
+    "liquidityMcRatio": 0.0096,
+    "estimatedPriceImpact": 0.1873
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

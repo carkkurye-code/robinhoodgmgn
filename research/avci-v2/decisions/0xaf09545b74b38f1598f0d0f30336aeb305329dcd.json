@@ -1,0 +1,13 @@
+{
+  "contract": "0xaf09545b74b38f1598f0d0f30336aeb305329dcd",
+  "tokenSymbol": "RWA",
+  "decidedAt": "2026-09-11T05:56:33.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($56,245.668) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 56245.668000000005,
+  "observedLiquidity": 511.439080034458,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

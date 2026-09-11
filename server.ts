@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import { createServer as createViteServer } from 'vite';
 import path from 'node:path';
 import { TradingEngine } from './server/tradingEngine.js';
+import { AvciV2ShadowCollector } from './server/avciV2ShadowCollector.js';
 import type { VerificationItem } from './server/types.js';
 
 async function startServer() {
@@ -148,6 +149,27 @@ async function startServer() {
 
   app.get('/api/verification', (req, res) => {
     res.json({ success: true, items: getVerificationItems() });
+  });
+
+  // AVCI V2 Shadow Data Collector (Pure Research - No Live Orders)
+  const shadowCollector = new AvciV2ShadowCollector();
+
+  app.get('/api/avci-v2/status', (req, res) => {
+    const summary = shadowCollector.getCollectorSummary();
+    res.json({ success: true, shadowMode: true, summary });
+  });
+
+  app.post('/api/avci-v2/scan', (req, res) => {
+    try {
+      const trenches = shadowCollector.fetchLiveTrenches(50);
+      for (const t of trenches) {
+        if (t.address) shadowCollector.recordTokenObservation(t);
+      }
+      const summary = shadowCollector.getCollectorSummary();
+      res.json({ success: true, processed: trenches.length, summary });
+    } catch (err: any) {
+      res.status(500).json({ success: false, error: err.message });
+    }
   });
 
   app.get('/api/config', (req, res) => {

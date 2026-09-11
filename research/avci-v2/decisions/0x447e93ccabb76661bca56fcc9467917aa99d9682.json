@@ -1,0 +1,13 @@
+{
+  "contract": "0x447e93ccabb76661bca56fcc9467917aa99d9682",
+  "tokenSymbol": "SUNPEPE",
+  "decidedAt": "2026-09-11T05:05:30.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($51,690.103) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 51690.103,
+  "observedLiquidity": 775.1074957973299,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

@@ -1,0 +1,40 @@
+{
+  "token": "Q2",
+  "contract": "0xd5dc8ab4fa92ebdc3e7dc6dfa69ed6ef42544efe",
+  "observedAt": "2026-09-11T05:47:09.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000051756069,
+    "marketCap": 51756.068999999996,
+    "liquidity": 326.3341280664637,
+    "volume": 726.73081729,
+    "liquidityMcRatio": 0.0063,
+    "estimatedPriceImpact": 0.3064
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

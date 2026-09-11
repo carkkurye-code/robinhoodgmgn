@@ -1,0 +1,13 @@
+{
+  "contract": "0xb7ce574025c1fbfb990642e94dd05f54b2f3b6c0",
+  "symbol": "MEOW",
+  "name": "Crunchucathood",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T04:48:42.000Z",
+  "t0MarketCap": 56735.276,
+  "t0Liquidity": 584.3025670456279,
+  "t0Price": 0.000056735276,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T04:48:42.000Z",
+  "decision": "REJECT"
+}

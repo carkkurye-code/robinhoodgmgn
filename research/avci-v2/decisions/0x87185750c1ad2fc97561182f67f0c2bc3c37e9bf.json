@@ -1,0 +1,13 @@
+{
+  "contract": "0x87185750c1ad2fc97561182f67f0c2bc3c37e9bf",
+  "tokenSymbol": "RWA",
+  "decidedAt": "2026-09-11T04:16:24.000Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Likidite çok sığ ($572.973) - Yüksek slippage riski"
+  ],
+  "observedMarketCap": 43245.62,
+  "observedLiquidity": 572.9731486971559,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

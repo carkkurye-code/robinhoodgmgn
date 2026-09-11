@@ -1,0 +1,13 @@
+{
+  "contract": "0x891e611987d4546d8ef57dfa9f1b371811d0fa99",
+  "tokenSymbol": "KISHU",
+  "decidedAt": "2026-09-11T07:52:53.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($55,895.912) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 55895.912000000004,
+  "observedLiquidity": 533.9576674297298,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

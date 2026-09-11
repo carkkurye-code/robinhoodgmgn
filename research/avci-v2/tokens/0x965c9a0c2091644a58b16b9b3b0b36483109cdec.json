@@ -1,0 +1,13 @@
+{
+  "contract": "0x965c9a0c2091644a58b16b9b3b0b36483109cdec",
+  "symbol": "VICE",
+  "name": "VICE BUCKS",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T05:31:29.000Z",
+  "t0MarketCap": 52975.416,
+  "t0Liquidity": 717.8150412422533,
+  "t0Price": 0.000052975416,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T05:31:29.000Z",
+  "decision": "REJECT"
+}

@@ -1,0 +1,13 @@
+{
+  "contract": "0xd5dc8ab4fa92ebdc3e7dc6dfa69ed6ef42544efe",
+  "tokenSymbol": "Q2",
+  "decidedAt": "2026-09-11T05:47:09.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($51,756.069) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 51756.068999999996,
+  "observedLiquidity": 326.3341280664637,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

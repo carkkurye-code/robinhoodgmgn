@@ -1,0 +1,40 @@
+{
+  "token": "TripleT",
+  "contract": "0x280f4ac5f109006dd7dbcfb71a29868fa9c7bc52",
+  "observedAt": "2026-09-11T07:53:28.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000052573709,
+    "marketCap": 52573.709,
+    "liquidity": 444.7961003504122,
+    "volume": 190.38483189,
+    "liquidityMcRatio": 0.0085,
+    "estimatedPriceImpact": 0.2248
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "token": "DICE",
+  "contract": "0x19c16cf9b64e3f246b0774c587045ce55a239168",
+  "observedAt": "2026-09-11T08:32:05.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "EARLY_DISCOVERY",
+  "market": {
+    "price": 0.000013237265,
+    "marketCap": 13237.265000000001,
+    "liquidity": 2048.920256040897,
+    "volume": 4714.091073515,
+    "liquidityMcRatio": 0.1548,
+    "estimatedPriceImpact": 0.0488
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

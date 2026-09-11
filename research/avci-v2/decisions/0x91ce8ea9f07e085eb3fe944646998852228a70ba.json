@@ -1,0 +1,13 @@
+{
+  "contract": "0x91ce8ea9f07e085eb3fe944646998852228a70ba",
+  "tokenSymbol": "Boba",
+  "decidedAt": "2026-09-11T03:47:51.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($53,078.013) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 53078.013,
+  "observedLiquidity": 29.92454377736439,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

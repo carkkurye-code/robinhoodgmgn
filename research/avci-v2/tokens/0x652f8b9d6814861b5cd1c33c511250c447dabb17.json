@@ -1,0 +1,13 @@
+{
+  "contract": "0x652f8b9d6814861b5cd1c33c511250c447dabb17",
+  "symbol": "CPU",
+  "name": "Project CPU",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T07:23:13.000Z",
+  "t0MarketCap": 52776.99,
+  "t0Liquidity": 510.9413178319668,
+  "t0Price": 0.00005277699,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T07:23:13.000Z",
+  "decision": "REJECT"
+}

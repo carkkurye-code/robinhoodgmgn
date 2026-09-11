@@ -1,0 +1,13 @@
+{
+  "contract": "0x35abe824099e39e946d8c96ca9b2fe9a7c5f2598",
+  "symbol": "Cashd0ge",
+  "name": "Cashd0ge",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-11T04:08:50.000Z",
+  "t0MarketCap": 49474.275,
+  "t0Liquidity": 409.96136583779094,
+  "t0Price": 0.000049474275,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T04:08:50.000Z",
+  "decision": "WATCH"
+}

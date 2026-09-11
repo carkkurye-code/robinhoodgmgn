@@ -1,0 +1,13 @@
+{
+  "contract": "0x82f4147e0731b0ffb1762221001dd30baca82954",
+  "symbol": "TRUMP",
+  "name": "TRUMP 2028",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T09:15:41.000Z",
+  "t0MarketCap": 62698.084,
+  "t0Liquidity": 208.70100564368138,
+  "t0Price": 0.000062698084,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T09:15:41.000Z",
+  "decision": "REJECT"
+}

@@ -1,0 +1,13 @@
+{
+  "contract": "0xe456a1f5b5b3ec5e74786462402fcc5823d80901",
+  "symbol": "CODES",
+  "name": "CODES",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-10T19:28:38.000Z",
+  "t0MarketCap": 67376.47899999999,
+  "t0Liquidity": 327.0901899633572,
+  "t0Price": 0.000067376479,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T19:28:38.000Z",
+  "decision": "REJECT"
+}

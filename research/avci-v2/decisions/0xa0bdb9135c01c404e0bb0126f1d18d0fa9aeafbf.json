@@ -1,0 +1,13 @@
+{
+  "contract": "0xa0bdb9135c01c404e0bb0126f1d18d0fa9aeafbf",
+  "tokenSymbol": "HELLAMONEY",
+  "decidedAt": "2026-09-11T09:25:24.000Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Bekleme kriterinde"
+  ],
+  "observedMarketCap": 25789.997,
+  "observedLiquidity": 42712.64625747333,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

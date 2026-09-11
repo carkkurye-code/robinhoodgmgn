@@ -1,0 +1,40 @@
+{
+  "token": "PONSHOOD",
+  "contract": "0x49c6cd103db47798a286c6798adbd5c662e36f13",
+  "observedAt": "2026-09-11T04:29:42.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000054300503,
+    "marketCap": 54300.503000000004,
+    "liquidity": 110.34533801929697,
+    "volume": 842.73172545,
+    "liquidityMcRatio": 0.002,
+    "estimatedPriceImpact": 0.9062
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

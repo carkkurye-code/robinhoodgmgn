@@ -1,0 +1,13 @@
+{
+  "contract": "0x9c791ab53c26dfbbbc16090498b3eca633516e5e",
+  "symbol": "Rivra",
+  "name": "Rivra",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-10T19:49:39.000Z",
+  "t0MarketCap": 79955.905,
+  "t0Liquidity": 919.628502207093,
+  "t0Price": 0.000079955905,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T19:49:39.000Z",
+  "decision": "REJECT"
+}

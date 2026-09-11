@@ -1,0 +1,13 @@
+{
+  "contract": "0x11dbafc2141bbbd3224e94b1bd79c549760cc9c6",
+  "symbol": "AAA",
+  "name": "aaaa",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-11T02:23:26.000Z",
+  "t0MarketCap": 29964.867000000002,
+  "t0Liquidity": 253.07378034915956,
+  "t0Price": 0.000029964867,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T02:23:26.000Z",
+  "decision": "WATCH"
+}

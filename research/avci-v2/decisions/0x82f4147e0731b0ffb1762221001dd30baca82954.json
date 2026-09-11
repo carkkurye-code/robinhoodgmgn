@@ -1,0 +1,13 @@
+{
+  "contract": "0x82f4147e0731b0ffb1762221001dd30baca82954",
+  "tokenSymbol": "TRUMP",
+  "decidedAt": "2026-09-11T09:15:41.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($62,698.084) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 62698.084,
+  "observedLiquidity": 208.70100564368138,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

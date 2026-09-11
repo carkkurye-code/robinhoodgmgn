@@ -1,0 +1,13 @@
+{
+  "contract": "0x65d761aa67ac8e134772a8be13fe9d66934d11f2",
+  "tokenSymbol": "BOT",
+  "decidedAt": "2026-09-10T18:50:42.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($64,162.792) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 64162.79200000001,
+  "observedLiquidity": 275.1323188495994,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

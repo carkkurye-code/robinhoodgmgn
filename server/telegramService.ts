@@ -219,6 +219,52 @@ export class TelegramService {
 • Toplam Bilinen Maliyet: $${(c?.totalKnownCostsUsd ?? 0).toFixed(2)} USDT`;
     }
 
+    let migrationBlock = '';
+    if (isBuy && trade.migrationAnalysis) {
+      const ma = trade.migrationAnalysis;
+      if (ma.migrationDetected) {
+        const formatFlow = (val: number) => (val >= 0 ? `+$${Math.round(val)}` : `-$${Math.round(Math.abs(val))}`);
+        migrationBlock = `
+--------------------------------
+<b>MIGRATION ANALİZİ</b>
+
+Migration: ✅
+T+1m Net Flow: ${formatFlow(ma.netFlow1m)}
+T+2m Net Flow: ${formatFlow(ma.netFlow2m)}
+T+3m Net Flow: ${formatFlow(ma.netFlow3m)}
+Buyer Ratio: %${Math.round(ma.buyerRatio1m * 100)}
+Buy USD: $${Math.round(ma.buyUsd1m)}
+Sell USD: $${Math.round(ma.sellUsd1m)}
+
+Migration Durumu:
+${ma.statusBadge}
+
+<i>Bu alan araştırma amaçlıdır. Mevcut BUY/SELL kararını değiştirmez.</i>`;
+      } else if (ma.status === 'NOT_MIGRATED') {
+        migrationBlock = `
+--------------------------------
+<b>MIGRATION ANALİZİ</b>
+
+Migration: ❌ (DEX Migration henüz gerçekleşmedi / Bonding Curve evresi)
+
+Migration Durumu:
+${ma.statusBadge}
+
+<i>Bu alan araştırma amaçlıdır. Mevcut BUY/SELL kararını değiştirmez.</i>`;
+      } else {
+        migrationBlock = `
+--------------------------------
+<b>MIGRATION ANALİZİ</b>
+
+Migration: ⚠️ Veri Alınamadı
+
+Migration Durumu:
+${ma.statusBadge}
+
+<i>Bu alan araştırma amaçlıdır. Mevcut BUY/SELL kararını değiştirmez.</i>`;
+      }
+    }
+
     const gmgnUrl = `https://gmgn.ai/rh/token/${trade.tokenAddress}`;
     const gmgnLink = `<a href="${gmgnUrl}">🔗 GMGN</a>`;
 
@@ -229,7 +275,7 @@ export class TelegramService {
 <b>Kontrat:</b> <code>${trade.tokenAddress}</code>
 <b>İşlem Fiyatı:</b> $${trade.priceUsd.toFixed(6)}
 <b>Alım Tutarı:</b> $${trade.usdtAmount.toFixed(2)} USDT (${trade.tokenAmount.toLocaleString()} Token)
-<b>Dinamik Skor:</b> %${trade.continuationScoreAtTrade}
+<b>Dinamik Skor:</b> %${trade.continuationScoreAtTrade}${migrationBlock}
 ${gmgnLink}
 --------------------------------
 <i>Bilgi: Telegram işlem cüzdanı değildir. İşlemler GMGN & Robinhood Chain üzerinden izlenir.</i>`

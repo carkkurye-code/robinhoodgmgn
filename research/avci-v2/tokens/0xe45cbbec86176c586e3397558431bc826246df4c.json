@@ -1,0 +1,13 @@
+{
+  "contract": "0xe45cbbec86176c586e3397558431bc826246df4c",
+  "symbol": "OIO",
+  "name": "OioFlow",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-11T02:38:15.000Z",
+  "t0MarketCap": 43101.614,
+  "t0Liquidity": 605.7488743427627,
+  "t0Price": 0.000043101614,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T02:38:15.000Z",
+  "decision": "WATCH"
+}

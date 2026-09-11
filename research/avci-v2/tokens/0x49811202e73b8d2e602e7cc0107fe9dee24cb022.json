@@ -1,0 +1,13 @@
+{
+  "contract": "0x49811202e73b8d2e602e7cc0107fe9dee24cb022",
+  "symbol": "MARA",
+  "name": "Robinhood AI Agent",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T04:55:08.000Z",
+  "t0MarketCap": 54046.374,
+  "t0Liquidity": 533.8700601007338,
+  "t0Price": 0.000054046374,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T04:55:08.000Z",
+  "decision": "REJECT"
+}

@@ -1,0 +1,40 @@
+{
+  "token": "VEEFO",
+  "contract": "0xfc95427092567beb96cf3bca3ae09bcc8cd1bba3",
+  "observedAt": "2026-09-10T17:31:57.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000061844587,
+    "marketCap": 61844.587,
+    "liquidity": 0.536198,
+    "volume": 21529.72022296,
+    "liquidityMcRatio": 0,
+    "estimatedPriceImpact": 186.4983
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

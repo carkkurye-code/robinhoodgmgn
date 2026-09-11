@@ -1,0 +1,40 @@
+{
+  "token": "Rivra",
+  "contract": "0x9c791ab53c26dfbbbc16090498b3eca633516e5e",
+  "observedAt": "2026-09-10T19:49:39.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000079955905,
+    "marketCap": 79955.905,
+    "liquidity": 919.628502207093,
+    "volume": 0.084191033,
+    "liquidityMcRatio": 0.0115,
+    "estimatedPriceImpact": 0.1087
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

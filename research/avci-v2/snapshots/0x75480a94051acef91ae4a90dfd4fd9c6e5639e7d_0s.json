@@ -1,0 +1,40 @@
+{
+  "token": "PRISMOR",
+  "contract": "0x75480a94051acef91ae4a90dfd4fd9c6e5639e7d",
+  "observedAt": "2026-09-11T09:02:53.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000068259282,
+    "marketCap": 68259.28199999999,
+    "liquidity": 667.8745869160787,
+    "volume": 218.78589408,
+    "liquidityMcRatio": 0.0098,
+    "estimatedPriceImpact": 0.1497
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

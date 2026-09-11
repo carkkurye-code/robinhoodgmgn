@@ -110,6 +110,21 @@ export const TradeHistory: React.FC<TradeHistoryProps> = ({ trades }) => {
                       <div className="text-[10px] text-slate-500 font-mono mt-0.5">
                         İşlem Anı Skor: %{trade.continuationScoreAtTrade.toFixed(0)}
                       </div>
+                      {trade.migrationAnalysis && (
+                        <div className="mt-1 flex items-center gap-1.5 flex-wrap">
+                          <span
+                            className="px-1.5 py-0.5 rounded text-[10px] bg-slate-800 border border-slate-700 font-mono text-slate-300"
+                            title={trade.migrationAnalysis.reasons?.join(' | ')}
+                          >
+                            {trade.migrationAnalysis.statusBadge}
+                          </span>
+                          {trade.migrationAnalysis.migrationDetected && (
+                            <span className="text-[10px] text-slate-400 font-mono">
+                              1m Net: {trade.migrationAnalysis.netFlow1m >= 0 ? '+' : ''}${Math.round(trade.migrationAnalysis.netFlow1m)}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </td>
                     <td className="py-3 px-3 whitespace-nowrap">
                       {trade.telegramNotified ? (

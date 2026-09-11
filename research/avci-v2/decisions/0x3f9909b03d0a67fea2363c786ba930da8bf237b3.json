@@ -1,0 +1,13 @@
+{
+  "contract": "0x3f9909b03d0a67fea2363c786ba930da8bf237b3",
+  "tokenSymbol": "TOESHARK",
+  "decidedAt": "2026-09-10T19:05:15.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($52,223.342) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 52223.342,
+  "observedLiquidity": 140.43057085518652,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

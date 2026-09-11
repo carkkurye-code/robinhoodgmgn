@@ -1,0 +1,13 @@
+{
+  "contract": "0x20a32dfb8fc14eb557f7c035a332e4b3d7d10800",
+  "tokenSymbol": "PUCHATO",
+  "decidedAt": "2026-09-11T01:36:13.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($53,657.424) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 53657.424,
+  "observedLiquidity": 76.1762313130682,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

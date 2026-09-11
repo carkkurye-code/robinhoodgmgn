@@ -1,0 +1,40 @@
+{
+  "token": "CODES",
+  "contract": "0xe456a1f5b5b3ec5e74786462402fcc5823d80901",
+  "observedAt": "2026-09-10T19:28:38.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000067376479,
+    "marketCap": 67376.47899999999,
+    "liquidity": 327.0901899633572,
+    "volume": 2091.78533292,
+    "liquidityMcRatio": 0.0049,
+    "estimatedPriceImpact": 0.3057
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

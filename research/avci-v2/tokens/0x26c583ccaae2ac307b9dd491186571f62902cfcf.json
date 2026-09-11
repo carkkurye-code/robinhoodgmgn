@@ -1,0 +1,13 @@
+{
+  "contract": "0x26c583ccaae2ac307b9dd491186571f62902cfcf",
+  "symbol": "PredictQ",
+  "name": "PredictQ",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-10T16:02:29.000Z",
+  "t0MarketCap": 48449.846,
+  "t0Liquidity": 496.2222648870716,
+  "t0Price": 0.000048449846,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T16:02:29.000Z",
+  "decision": "WATCH"
+}

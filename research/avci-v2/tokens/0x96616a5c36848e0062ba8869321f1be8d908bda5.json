@@ -1,0 +1,13 @@
+{
+  "contract": "0x96616a5c36848e0062ba8869321f1be8d908bda5",
+  "symbol": "Boba",
+  "name": "Boba",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T03:11:14.000Z",
+  "t0MarketCap": 52558.849,
+  "t0Liquidity": 104.57990832595179,
+  "t0Price": 0.000052558849,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T03:11:14.000Z",
+  "decision": "REJECT"
+}

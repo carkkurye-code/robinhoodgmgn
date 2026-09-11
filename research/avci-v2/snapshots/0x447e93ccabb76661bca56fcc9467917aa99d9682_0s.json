@@ -1,0 +1,40 @@
+{
+  "token": "SUNPEPE",
+  "contract": "0x447e93ccabb76661bca56fcc9467917aa99d9682",
+  "observedAt": "2026-09-11T05:05:30.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000051690103,
+    "marketCap": 51690.103,
+    "liquidity": 775.1074957973299,
+    "volume": 546.69486463,
+    "liquidityMcRatio": 0.015,
+    "estimatedPriceImpact": 0.129
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

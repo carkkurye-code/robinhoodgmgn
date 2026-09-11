@@ -1,0 +1,13 @@
+{
+  "contract": "0x88d628ff75b669fd8f4225297a0d8773d2cd09b7",
+  "symbol": "IMAGINE",
+  "name": "IMAGINE",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T08:51:15.000Z",
+  "t0MarketCap": 50238.292,
+  "t0Liquidity": 802.0128705547036,
+  "t0Price": 0.000050238292,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T08:51:15.000Z",
+  "decision": "REJECT"
+}

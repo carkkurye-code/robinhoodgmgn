@@ -1,0 +1,13 @@
+{
+  "contract": "0x6a409c5b09754437ee50be27892fc8d04cbd044e",
+  "tokenSymbol": "LMEOW",
+  "decidedAt": "2026-09-11T04:06:52.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($55,289.308) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 55289.308000000005,
+  "observedLiquidity": 40.595168124501924,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

@@ -1,0 +1,40 @@
+{
+  "token": "MARSCOIN",
+  "contract": "0xac0a5a30e33e50846e2b403f1ebe393478a4a71c",
+  "observedAt": "2026-09-11T06:10:58.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000055524486,
+    "marketCap": 55524.486000000004,
+    "liquidity": 1176.638886508864,
+    "volume": 246.88854331,
+    "liquidityMcRatio": 0.0212,
+    "estimatedPriceImpact": 0.085
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

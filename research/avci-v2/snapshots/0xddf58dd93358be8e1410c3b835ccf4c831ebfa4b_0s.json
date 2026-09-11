@@ -1,0 +1,40 @@
+{
+  "token": "GAIN",
+  "contract": "0xddf58dd93358be8e1410c3b835ccf4c831ebfa4b",
+  "observedAt": "2026-09-10T16:34:06.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000050225448,
+    "marketCap": 50225.448,
+    "liquidity": 30.91334874323867,
+    "volume": 1799.95257671,
+    "liquidityMcRatio": 0.0006,
+    "estimatedPriceImpact": 3.2348
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

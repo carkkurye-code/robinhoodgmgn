@@ -1,0 +1,13 @@
+{
+  "contract": "0xd5dc8ab4fa92ebdc3e7dc6dfa69ed6ef42544efe",
+  "symbol": "Q2",
+  "name": "Q2",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T05:47:09.000Z",
+  "t0MarketCap": 51756.068999999996,
+  "t0Liquidity": 326.3341280664637,
+  "t0Price": 0.000051756069,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T05:47:09.000Z",
+  "decision": "REJECT"
+}

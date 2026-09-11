@@ -1,0 +1,40 @@
+{
+  "token": "Boba",
+  "contract": "0x52f4f16b22f5365edf5c570a17516d5fcbf08d75",
+  "observedAt": "2026-09-11T03:26:06.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000053119453,
+    "marketCap": 53119.453,
+    "liquidity": 81.31562880527633,
+    "volume": 954.09926075,
+    "liquidityMcRatio": 0.0015,
+    "estimatedPriceImpact": 1.2298
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "contract": "0x7485d412bde68a24cd03ad1d59ab2f5d0d9d8abe",
+  "tokenSymbol": "MURPH",
+  "decidedAt": "2026-09-11T01:44:15.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($52,690.089) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 52690.089,
+  "observedLiquidity": 415.0982903331311,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

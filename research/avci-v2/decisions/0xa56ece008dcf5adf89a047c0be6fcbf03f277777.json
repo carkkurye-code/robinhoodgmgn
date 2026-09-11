@@ -1,0 +1,13 @@
+{
+  "contract": "0xa56ece008dcf5adf89a047c0be6fcbf03f277777",
+  "tokenSymbol": "CALL",
+  "decidedAt": "2026-09-10T20:50:54.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($61,226.751) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 61226.751,
+  "observedLiquidity": 9897.985273193644,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

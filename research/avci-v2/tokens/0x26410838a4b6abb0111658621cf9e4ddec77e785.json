@@ -1,0 +1,13 @@
+{
+  "contract": "0x26410838a4b6abb0111658621cf9e4ddec77e785",
+  "symbol": "PONSHOOD",
+  "name": "Ponshood",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T04:45:54.000Z",
+  "t0MarketCap": 55754.86,
+  "t0Liquidity": 46.52214140707055,
+  "t0Price": 0.00005575486,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T04:45:54.000Z",
+  "decision": "REJECT"
+}

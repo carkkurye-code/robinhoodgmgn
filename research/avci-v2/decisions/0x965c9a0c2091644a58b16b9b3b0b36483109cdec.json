@@ -1,0 +1,13 @@
+{
+  "contract": "0x965c9a0c2091644a58b16b9b3b0b36483109cdec",
+  "tokenSymbol": "VICE",
+  "decidedAt": "2026-09-11T05:31:29.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($52,975.416) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 52975.416,
+  "observedLiquidity": 717.8150412422533,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

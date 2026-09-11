@@ -1,0 +1,13 @@
+{
+  "contract": "0x76a4dec1be6bf85bd13c55eb4933411be53e013a",
+  "tokenSymbol": "BRODIE",
+  "decidedAt": "2026-09-11T03:44:15.000Z",
+  "decision": "WATCH",
+  "reasons": [
+    "Likidite çok sığ ($240.36) - Yüksek slippage riski"
+  ],
+  "observedMarketCap": 43042.898,
+  "observedLiquidity": 240.3596831276969,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

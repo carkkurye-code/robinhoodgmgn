@@ -1,0 +1,13 @@
+{
+  "contract": "0xe4578de0d947d3a59ce29073093f65c7027b694c",
+  "symbol": "BOSS",
+  "name": "A Bum today can be a Boss",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T08:40:14.000Z",
+  "t0MarketCap": 52649.343,
+  "t0Liquidity": 238.78990943824832,
+  "t0Price": 0.000052649343,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T08:40:14.000Z",
+  "decision": "REJECT"
+}

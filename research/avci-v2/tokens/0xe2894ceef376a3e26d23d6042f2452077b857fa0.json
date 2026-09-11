@@ -1,0 +1,13 @@
+{
+  "contract": "0xe2894ceef376a3e26d23d6042f2452077b857fa0",
+  "symbol": "memestock",
+  "name": "memestock",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-11T07:21:04.000Z",
+  "t0MarketCap": 43272.292,
+  "t0Liquidity": 641.972330446769,
+  "t0Price": 0.000043272292,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T07:21:04.000Z",
+  "decision": "WATCH"
+}

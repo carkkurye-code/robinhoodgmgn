@@ -3,6 +3,7 @@ import path from 'node:path';
 import { GMGNService } from './gmgnService.js';
 import { AnalysisEngine } from './analysisEngine.js';
 import { TelegramService } from './telegramService.js';
+import { MigrationValidationEngine } from './migrationValidationEngine.js';
 import type { BotState, ScannedToken, ActivePosition, ExecutedTrade, ExecutionMode, GMGNConfig, TradeCostDetails } from './types.js';
 
 const SETTINGS_FILE_PATH = path.join(process.cwd(), 'server', 'bot-settings.json');
@@ -34,6 +35,7 @@ export class TradingEngine {
   private gmgnService: GMGNService;
   private analysisEngine: AnalysisEngine;
   private telegramService: TelegramService;
+  private migrationValidationEngine: MigrationValidationEngine;
 
   private state: BotState;
   private loopInterval: NodeJS.Timeout | null = null;
@@ -46,6 +48,7 @@ export class TradingEngine {
     this.gmgnService = new GMGNService(config);
     this.analysisEngine = new AnalysisEngine();
     this.telegramService = new TelegramService(config.telegramBotToken, config.telegramChatId);
+    this.migrationValidationEngine = new MigrationValidationEngine();
 
     const initialTradeAmount = loadSavedTradeAmount();
 
@@ -472,6 +475,21 @@ export class TradingEngine {
     this.sessionTradedTokens.add(token.address.toLowerCase());
 
     this.tradeCounter++;
+
+    // Migration Validation Katmanı (Araştırma & Deneme Amaçlı Analiz)
+    // NOT: Mevcut BUY kararını DEĞİŞTİRMEZ. Yalnızca analiz ve Telegram raporu için değerlendirir.
+    let migrationAnalysis = token.migrationAnalysis;
+    if (!migrationAnalysis) {
+      try {
+        migrationAnalysis = await this.migrationValidationEngine.validateToken(token.address, token);
+      } catch (err) {
+        console.warn(`[TradingEngine] Migration analizi hatası (${token.symbol}):`, err);
+      }
+    }
+    if (migrationAnalysis) {
+      token.migrationAnalysis = migrationAnalysis;
+    }
+
     const tradeRecord: ExecutedTrade = {
       id: `trade_buy_${Date.now()}_${this.tradeCounter}`,
       timestamp: Date.now(),
@@ -486,6 +504,7 @@ export class TradingEngine {
       continuationScoreAtTrade: score,
       costs: initialCosts,
       telegramNotified: false,
+      migrationAnalysis,
     };
 
     // Send Telegram notification

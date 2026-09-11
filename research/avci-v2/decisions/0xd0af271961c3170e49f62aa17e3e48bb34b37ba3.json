@@ -1,0 +1,13 @@
+{
+  "contract": "0xd0af271961c3170e49f62aa17e3e48bb34b37ba3",
+  "tokenSymbol": "imdbot",
+  "decidedAt": "2026-09-10T19:45:38.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($117,183.86) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 117183.86,
+  "observedLiquidity": 4379.077225783821,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

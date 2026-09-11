@@ -1,0 +1,13 @@
+{
+  "contract": "0xfc95427092567beb96cf3bca3ae09bcc8cd1bba3",
+  "tokenSymbol": "VEEFO",
+  "decidedAt": "2026-09-10T17:31:57.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($61,844.587) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 61844.587,
+  "observedLiquidity": 0.536198,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

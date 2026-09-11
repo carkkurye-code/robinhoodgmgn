@@ -1,0 +1,13 @@
+{
+  "contract": "0x69ab8d3a0e7698492243c4dd4cb6cdbc4c4471a5",
+  "symbol": "$1",
+  "name": "$1 is all you need",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-10T17:35:32.000Z",
+  "t0MarketCap": 130353.68000000001,
+  "t0Liquidity": 5286.57561680584,
+  "t0Price": 0.00013035368,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T17:35:32.000Z",
+  "decision": "REJECT"
+}

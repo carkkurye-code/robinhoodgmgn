@@ -1,0 +1,13 @@
+{
+  "contract": "0x280f4ac5f109006dd7dbcfb71a29868fa9c7bc52",
+  "symbol": "TripleT",
+  "name": "Tung Tung Tung Sahur",
+  "discoveryType": "LATE_DISCOVERY",
+  "firstObservedAt": "2026-09-11T07:53:28.000Z",
+  "t0MarketCap": 52573.709,
+  "t0Liquidity": 444.7961003504122,
+  "t0Price": 0.000052573709,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-11T07:53:28.000Z",
+  "decision": "REJECT"
+}

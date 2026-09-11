@@ -1,0 +1,13 @@
+{
+  "contract": "0x991a6301c14bbf5aea6dae68ca7c89afccdfad74",
+  "tokenSymbol": "FRUG",
+  "decidedAt": "2026-09-11T02:01:19.000Z",
+  "decision": "REJECT",
+  "reasons": [
+    "Market Cap $50K üzerinde ($54,308.428) - Geç Keşif (LATE_DISCOVERY)"
+  ],
+  "observedMarketCap": 54308.428,
+  "observedLiquidity": 591.2012053232626,
+  "availableFeaturesCount": 3,
+  "unavailableFeaturesCount": 2
+}

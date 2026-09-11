@@ -1,0 +1,40 @@
+{
+  "token": "LOX",
+  "contract": "0x545643e4fa414719282171cb14d2d897d84f0023",
+  "observedAt": "2026-09-11T01:26:58.000Z",
+  "elapsedSeconds": 0,
+  "discoveryType": "LATE_DISCOVERY",
+  "market": {
+    "price": 0.000055662782,
+    "marketCap": 55662.782,
+    "liquidity": 611.75122331504,
+    "volume": 265.57401853,
+    "liquidityMcRatio": 0.011,
+    "estimatedPriceImpact": 0.1635
+  },
+  "flow": {
+    "buyVolume": null,
+    "sellVolume": null,
+    "buyerRatio": null,
+    "transactionCount": null
+  },
+  "wallet": {
+    "uniqueBuyers": null,
+    "uniqueSellers": null,
+    "holderCount": null,
+    "botRatio": null,
+    "entrapmentRatio": null,
+    "bundlerWallets": null
+  },
+  "availability": {
+    "historical": true,
+    "decisionTimeAvailable": "AVAILABLE_AT_DECISION"
+  },
+  "derived": {
+    "buyerGrowth": null,
+    "volumeGrowth": null,
+    "priceAccelerationPct": null,
+    "liquidityDelta": null,
+    "demandStatus": "DATA_UNAVAILABLE"
+  }
+}

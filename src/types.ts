@@ -39,6 +39,44 @@ export interface ScannedToken {
   iouMatchDetails?: string;
   actionTaken?: 'BOUGHT' | 'SKIPPED' | 'MONITORING';
   decisionReason?: string;
+  migrationAnalysis?: MigrationValidationResult;
+}
+
+export interface MigrationValidationWindow {
+  window: '30s' | '1m' | '2m' | '3m' | '5m';
+  price: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  buyUsd: number;
+  sellUsd: number;
+  netFlow: number;
+  buyerRatio: number;
+  candleColor: 'GREEN' | 'RED' | 'DOJI';
+  priceChangeVsT0: number;
+}
+
+export interface MigrationValidationResult {
+  migrationDetected: boolean;
+  migrationTimestamp?: number;
+  t0Price?: number;
+  status: 'MIGRATION_STRONG' | 'MIGRATION_NEUTRAL' | 'MIGRATION_RISKY' | 'NOT_MIGRATED' | 'MIGRATION_DATA_UNAVAILABLE';
+  statusBadge: string;
+  riskScore: number;
+  netFlow1m: number;
+  netFlow2m: number;
+  netFlow3m: number;
+  buyerRatio1m: number;
+  buyUsd1m: number;
+  sellUsd1m: number;
+  volume1m: number;
+  isSpikeTrap: boolean;
+  reasons: string[];
+  windows: Record<string, MigrationValidationWindow>;
+  disclaimer: string;
+  analyzedAt: number;
 }
 
 export interface TradeCostDetails {
@@ -96,6 +134,7 @@ export interface ExecutedTrade {
   reason: string;
   continuationScoreAtTrade: number;
   telegramNotified: boolean;
+  migrationAnalysis?: MigrationValidationResult;
 }
 
 export interface BotState {

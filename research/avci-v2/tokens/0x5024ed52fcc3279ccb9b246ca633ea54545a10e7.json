@@ -1,0 +1,13 @@
+{
+  "contract": "0x5024ed52fcc3279ccb9b246ca633ea54545a10e7",
+  "symbol": "XBANK",
+  "name": "XBANK",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-10T20:30:00.000Z",
+  "t0MarketCap": 49218.645,
+  "t0Liquidity": 369.46297954593194,
+  "t0Price": 0.000049218645,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T20:30:00.000Z",
+  "decision": "WATCH"
+}

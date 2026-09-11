@@ -1,0 +1,13 @@
+{
+  "contract": "0xe8d41fd70be8fbf1e4677fe886ba8f10284b4b8d",
+  "symbol": "FALCHION",
+  "name": "falchion of titans",
+  "discoveryType": "EARLY_DISCOVERY",
+  "firstObservedAt": "2026-09-10T18:36:13.000Z",
+  "t0MarketCap": 49608.854,
+  "t0Liquidity": 274.4322951469212,
+  "t0Price": 0.000049608854,
+  "snapshotsCount": 1,
+  "lastSnapshotAt": "2026-09-10T18:36:13.000Z",
+  "decision": "WATCH"
+}
